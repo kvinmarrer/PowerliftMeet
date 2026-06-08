@@ -1,0 +1,41 @@
+<ion-header class="header" [translucent]="true">
+  <ion-toolbar class="header__container">
+    <img src="/assets/icon/kdks.png" alt="logo" class="header__logo" slot="start" />
+    <ion-title class="header__title" slot="end">
+      {{ title }}
+    </ion-title>
+
+    <ion-segment
+      class="header__language-buttons"
+      (ionChange)="changeLanguage($event)"
+      value="{{ 'LANGUAGE' | translate }}"
+      slot="end"
+    >
+      <ion-segment-button class="header__language-button" value="DE">
+        <ion-label>
+          <span class="header__full-text">Deutsch</span>
+          <span class="header__short-text">DE</span>
+        </ion-label>
+      </ion-segment-button>
+      <ion-segment-button class="header__language-button" value="EN">
+        <ion-label>
+          <span class="header__full-text">English</span>
+          <span class="header__short-text">EN</span>
+        </ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-list class="header__language-picker" slot="end" (ionChange)="changeLanguage($event)">
+      <ion-item>
+        <ion-select
+          label="Language"
+          label-placement="floating"
+          value="{{ 'LANGUAGE' | translate }}"
+        >
+          <ion-select-option value="DE"> Deutsch </ion-select-option>
+          <ion-select-option value="EN"> English </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </ion-toolbar>
+</ion-header>

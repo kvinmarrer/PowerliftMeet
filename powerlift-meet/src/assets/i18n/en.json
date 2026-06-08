@@ -1,12 +1,58 @@
 {
+  "LANGUAGE": "DE",
   "HEADER": {
-    "TITLE": "My App",
-    "SUBTITLE": "Welcome back!"
+    "SUBTITLE": "Abmelden"
   },
-  "NAV": {
-    "HOME": "Home",
-    "ABOUT": "About",
-    "CONTACT": "Contact"
+  "HOME": {
+    "TITLE": "Start",
+    "SUBTITLE": "Das ist die Startseite"
   },
-  "GREETING": "Hello, {{ name }}!"
+  "PLAN": {
+    "TITLE": "Plan",
+    "SUBTITLE": "Das ist die Planseite"
+  },
+  "SETTINGS": {
+    "TITLE": "Einstellungen",
+    "SUBTITLE": "Das ist die Einstellungsseite",
+    "CLEAR_DATA": "Daten löschen",
+    "LOCAL_DATA": {
+      "TITLE": "Lokale Daten",
+      "DESCRIPTION": "Löscht lokale Browser-Daten (LocalStorage)"
+    },
+    "TRAINING_DATA": {
+      "TITLE": "Trainingsdaten",
+      "BUTTON": "Alle Trainingsdaten löschen",
+      "DESCRIPTION": "Löscht ALLE Übungen, Übungsvorlagen, Muskelgruppen, Wochenpläne und Trainingspläne aus der Datenbank.",
+      "WARNING": "Diese Aktion kann nicht rückgängig gemacht werden!",
+      "CONFIRM": {
+        "HEADER": "Alle Trainingsdaten löschen",
+        "MESSAGE": "Sind Sie sicher, dass Sie ALLE Trainingsdaten löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+        "CANCEL": "Abbrechen",
+        "DELETE": "Ja, alles löschen"
+      },
+      "LOADING": "Lösche alle Trainingsdaten...",
+      "SUCCESS": "Alle Trainingsdaten wurden erfolgreich gelöscht.",
+      "ERROR": "Fehler beim Löschen der Trainingsdaten."
+    }
+  },
+  "ACCOUNT": {
+    "TITLE": "Konto",
+    "SUBTITLE": "Das ist die Kontoseite"
+  },
+  "WORKOUT": {
+    "TITLE": "Training",
+    "SUBTITLE": "Das ist die Trainingsseite"
+  },
+  "WORKOUT-TABLE": {
+    "MONDAY": "Montag",
+    "TUESDAY": "Dienstag",
+    "WEDNESDAY": "Mittwoch",
+    "THURSDAY": "Donnerstag",
+    "FRIDAY": "Freitag",
+    "SATURDAY": "Samstag",
+    "SUNDAY": "Sonntag",
+    "WEEKLY": "Wöchentlich",
+    "THREE-DAYS": "3-Tage",
+    "DAY": "Tag"
+  }
 }
