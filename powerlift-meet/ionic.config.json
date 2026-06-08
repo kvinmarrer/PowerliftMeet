@@ -1,0 +1,7 @@
+{
+  "name": "PowerliftMeet",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

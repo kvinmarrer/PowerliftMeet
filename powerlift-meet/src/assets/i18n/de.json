@@ -1,0 +1,12 @@
+{
+  "HEADER": {
+    "TITLE": "Meine App",
+    "SUBTITLE": "Willkommen zurück!"
+  },
+  "NAV": {
+    "HOME": "Startseite",
+    "ABOUT": "Über uns",
+    "CONTACT": "Kontakt"
+  },
+  "GREETING": "Hallo, {{ name }}!"
+}
