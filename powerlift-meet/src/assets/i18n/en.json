@@ -1,58 +1,58 @@
 {
-  "LANGUAGE": "DE",
+  "LANGUAGE": "EN",
   "HEADER": {
-    "SUBTITLE": "Abmelden"
+    "LOGOUT": "Logout"
   },
   "HOME": {
-    "TITLE": "Start",
-    "SUBTITLE": "Das ist die Startseite"
+    "TITLE": "Home",
+    "SUBTITLE": "This is the home page"
   },
   "PLAN": {
     "TITLE": "Plan",
-    "SUBTITLE": "Das ist die Planseite"
+    "SUBTITLE": "This is the plan page"
   },
   "SETTINGS": {
-    "TITLE": "Einstellungen",
-    "SUBTITLE": "Das ist die Einstellungsseite",
-    "CLEAR_DATA": "Daten löschen",
+    "TITLE": "Settings",
+    "SUBTITLE": "This is the settings page",
+    "CLEAR_DATA": "Clear Data",
     "LOCAL_DATA": {
-      "TITLE": "Lokale Daten",
-      "DESCRIPTION": "Löscht lokale Browser-Daten (LocalStorage)"
+      "TITLE": "Local Data",
+      "DESCRIPTION": "Clears local browser data (LocalStorage)"
     },
     "TRAINING_DATA": {
-      "TITLE": "Trainingsdaten",
-      "BUTTON": "Alle Trainingsdaten löschen",
-      "DESCRIPTION": "Löscht ALLE Übungen, Übungsvorlagen, Muskelgruppen, Wochenpläne und Trainingspläne aus der Datenbank.",
-      "WARNING": "Diese Aktion kann nicht rückgängig gemacht werden!",
+      "TITLE": "Training Data",
+      "BUTTON": "Delete All Training Data",
+      "DESCRIPTION": "Deletes ALL exercises, exercise templates, muscle groups, week plans and training plans from the database.",
+      "WARNING": "This action cannot be undone!",
       "CONFIRM": {
-        "HEADER": "Alle Trainingsdaten löschen",
-        "MESSAGE": "Sind Sie sicher, dass Sie ALLE Trainingsdaten löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
-        "CANCEL": "Abbrechen",
-        "DELETE": "Ja, alles löschen"
+        "HEADER": "Delete All Training Data",
+        "MESSAGE": "Are you sure you want to delete ALL training data? This action cannot be undone.",
+        "CANCEL": "Cancel",
+        "DELETE": "Yes, delete all"
       },
-      "LOADING": "Lösche alle Trainingsdaten...",
-      "SUCCESS": "Alle Trainingsdaten wurden erfolgreich gelöscht.",
-      "ERROR": "Fehler beim Löschen der Trainingsdaten."
+      "LOADING": "Deleting all training data...",
+      "SUCCESS": "All training data has been successfully deleted.",
+      "ERROR": "Error deleting training data."
     }
   },
   "ACCOUNT": {
-    "TITLE": "Konto",
-    "SUBTITLE": "Das ist die Kontoseite"
+    "TITLE": "Account",
+    "SUBTITLE": "This is the account page"
   },
   "WORKOUT": {
-    "TITLE": "Training",
-    "SUBTITLE": "Das ist die Trainingsseite"
+    "TITLE": "Workout",
+    "SUBTITLE": "This is the workout page"
   },
   "WORKOUT-TABLE": {
-    "MONDAY": "Montag",
-    "TUESDAY": "Dienstag",
-    "WEDNESDAY": "Mittwoch",
-    "THURSDAY": "Donnerstag",
-    "FRIDAY": "Freitag",
-    "SATURDAY": "Samstag",
-    "SUNDAY": "Sonntag",
-    "WEEKLY": "Wöchentlich",
-    "THREE-DAYS": "3-Tage",
-    "DAY": "Tag"
+    "MONDAY": "Monday",
+    "TUESDAY": "Tuesday",
+    "WEDNESDAY": "Wednesday",
+    "THURSDAY": "Thursday",
+    "FRIDAY": "Friday",
+    "SATURDAY": "Saturday",
+    "SUNDAY": "Sunday",
+    "WEEKLY": "Weekly",
+    "THREE-DAYS": "3-Days",
+    "DAY": "Day"
   }
 }
