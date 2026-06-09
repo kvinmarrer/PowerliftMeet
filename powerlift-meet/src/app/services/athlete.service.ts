@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
-export class MeetService {
-  private apiUrl = `${environment.apiBaseUrl}/meet`;
+export class AthleteService {
+    
+  private apiUrl = `${environment.apiBaseUrl}/athlete`;
 
   constructor(private http: HttpClient) {}
 
-  getMeets() {
+  getAthletes() {
     return this.http.get<string[]>(this.apiUrl);
   }
-  
+
 }

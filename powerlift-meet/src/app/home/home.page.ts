@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MeetService } from '../services/meet.service';
 
-
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss'],
-  standalone: false,
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
+  standalone: false
 })
-export class Tab1Page implements OnInit {
+export class HomePage implements OnInit {
+
   meets: string[] = [];
 
   constructor(private meetService: MeetService) {}
@@ -19,4 +19,5 @@ export class Tab1Page implements OnInit {
       error: (err) => console.error('Error fetching meets', err)
     });
   }
+
 }

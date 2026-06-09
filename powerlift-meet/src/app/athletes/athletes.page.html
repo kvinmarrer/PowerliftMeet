@@ -1,0 +1,15 @@
+<app-header title="{{ 'ATHLETES.TITLE'|translate }}"></app-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ 'ATHLETES.TITLE'|translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item *ngFor="let athlete of athletes">
+      {{ athlete }}
+    </ion-item>
+  </ion-list>
+</ion-content>
