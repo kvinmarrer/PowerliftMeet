@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using PowerliftMeet.Database;
+using DotNetEnv;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add CORS
@@ -29,10 +33,47 @@ builder.Configuration
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+Env.Load();
+
+var config = builder.Configuration;
+
+var baseConn = config.GetConnectionString("Database");
+var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
+
+var connectionString = $"{baseConn};Password={password}";
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(
+        connectionString,
+        sqlOptions =>
+        {
+            sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(15),
+                errorCodesToAdd: null
+            );
+        }
+    )
+);
+
 var app = builder.Build();
 
 // CORS first
 app.UseCors();
+
+using (var scope = app.Services.CreateScope())
+{
+    try 
+    {
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        db.Database.Migrate();
+        Console.WriteLine("Database migration completed successfully.");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Database migration failed: {ex.Message}");
+    }
+}
 
 app.UseRouting();
 

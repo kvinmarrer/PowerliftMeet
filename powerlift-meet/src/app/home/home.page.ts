@@ -9,7 +9,7 @@ import { MeetService } from '../services/meet.service';
 })
 export class HomePage implements OnInit {
 
-  meets: string[] = [];
+  meets: any[] = [];
 
   constructor(private meetService: MeetService) {}
 
