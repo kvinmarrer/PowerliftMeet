@@ -7,6 +7,8 @@ import { Tab1Page } from './tab1.page';
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { SharedModule } from '../shared/shared.module'; 
 
+import { MeetService } from '../services/meet.service';
+
 @NgModule({
   imports: [
     IonicModule,
@@ -15,6 +17,7 @@ import { SharedModule } from '../shared/shared.module';
     Tab1PageRoutingModule,
     SharedModule
   ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page],
+  providers: [MeetService]
 })
 export class Tab1PageModule {}

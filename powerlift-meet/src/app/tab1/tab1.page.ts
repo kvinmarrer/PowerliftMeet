@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MeetService } from '../services/meet.service';
+
 
 @Component({
   selector: 'app-tab1',
@@ -6,8 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['tab1.page.scss'],
   standalone: false,
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
+  meets: string[] = [];
 
-  constructor() {}
+  constructor(private meetService: MeetService) {}
 
+  ngOnInit() {
+    this.meetService.getMeets().subscribe({
+      next: (data) => this.meets = data,
+      error: (err) => console.error('Error fetching meets', err)
+    });
+  }
 }
