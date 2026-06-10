@@ -39,10 +39,8 @@ Env.Load();
 
 var config = builder.Configuration;
 
-var baseConn = config.GetConnectionString("Database");
-var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
-
-var connectionString = $"{baseConn};Password={password}";
+// get full connection string from environment variable
+var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(
