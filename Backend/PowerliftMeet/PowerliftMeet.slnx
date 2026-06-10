@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="PowerliftMeet.Api/PowerliftMeet.Api.csproj" />
   <Project Path="PowerliftMeet.Database/PowerliftMeet.Database.csproj" />
+  <Project Path="PowerliftMeet.Tests/PowerliftMeet.Tests.csproj" />
 </Solution>
