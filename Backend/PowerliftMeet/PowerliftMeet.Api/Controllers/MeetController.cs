@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PowerliftMeet.Database;
-using PowerliftMeet.Database.Entities;
+using PowerliftMeet.Api.DTOs;
+using PowerliftMeet.Api.Logic;
 
 namespace PowerliftMeet.Api.Controllers;
 
@@ -11,25 +10,46 @@ public class MeetController : ControllerBase
 {
 
     private readonly ILogger<MeetController> _logger;
-    private readonly AppDbContext _dbContext;
+    private readonly IMeetLogic _meetLogic;
 
-    public MeetController(ILogger<MeetController> logger, AppDbContext dbContext)
+    public MeetController(ILogger<MeetController> logger, IMeetLogic meetLogic)
     {
         _logger = logger;
-        _dbContext = dbContext;
+        _meetLogic = meetLogic;
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Meet>>> GetMeets()
+    public async Task<ActionResult<IEnumerable<MeetDto>>> GetMeets()
     {
-        return Ok(await _dbContext.Meets.ToListAsync());
+        try
+        {
+        var meets = await _meetLogic.GetMeetsAsync();
+        return Ok(meets);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving meets");
+            return StatusCode(500, "An error occurred while retrieving meets.");
+        }
     }
 
     [HttpPost]
-    public async Task<ActionResult<Meet>> CreateMeet(Meet meet)
+    public async Task<ActionResult<CreateMeetDto>> CreateMeet(CreateMeetDto meet)
     {
-        _dbContext.Meets.Add(meet);
-        await _dbContext.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetMeets), new { id = meet.Id }, meet);
+        try
+        {
+            if (meet == null)
+            {
+                return BadRequest("Meet data is required.");
+            }
+
+            var response = await _meetLogic.CreateMeetAsync(meet);
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error creating meet");
+            return StatusCode(500, "An error occurred while creating the meet.");
+        }
     }
 }

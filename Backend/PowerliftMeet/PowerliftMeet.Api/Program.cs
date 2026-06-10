@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PowerliftMeet.Database;
+using PowerliftMeet.Api.Logic;
 using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ builder.Services.AddCors(options =>
 });
 
 // Add services
+builder.Services.AddTransient<IMeetLogic, MeetLogic>();
 builder.Services.AddControllers();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
