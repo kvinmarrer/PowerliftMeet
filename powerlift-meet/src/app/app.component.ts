@@ -12,4 +12,16 @@ export class AppComponent {
     translate.setFallbackLang('de');
     translate.use('de');
   }
+
+  changeLanguage(language: any) {
+    if (!language) {
+      return;
+    }
+    if (!(language instanceof String)) {
+      language = language.detail.value;
+    }
+    language = language.toLowerCase();
+    this.translate?.use(language);
+    localStorage.setItem('language', language);
+  }
 }

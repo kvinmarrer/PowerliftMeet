@@ -10,5 +10,17 @@
   "ATHLETES": {
     "TITLE": "Athleten",
     "SUBTITLE": "Liste der Athleten"
+  },
+  "WEIGH_IN": {
+    "TITLE": "Wiegen",
+    "SUBTITLE": "Wiege die Athleten ein"
+  },
+  "LIFT_ENTRY": {
+    "TITLE": "Lift-Eingabe",
+    "SUBTITLE": "Gib die Lifts der Athleten ein"
+  },
+  "SCOREBOARD": {
+    "TITLE": "Scoreboard",
+    "SUBTITLE": "Aktuelle Ergebnisse"
   }
 }

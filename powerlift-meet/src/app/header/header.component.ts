@@ -33,15 +33,4 @@ export class HeaderComponent {
     this.translate?.use(langToStore);
   }
 
-  changeLanguage(language: any) {
-    if (!language) {
-      return;
-    }
-    if (!(language instanceof String)) {
-      language = language.detail.value;
-    }
-    language = language.toLowerCase();
-    this.translate?.use(language);
-    localStorage.setItem('language', language);
-  }
 }

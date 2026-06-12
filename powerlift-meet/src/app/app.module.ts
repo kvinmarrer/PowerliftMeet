@@ -10,6 +10,9 @@ import { AppComponent } from './app.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader, TRANSLATE_HTTP_LOADER_CONFIG } from '@ngx-translate/http-loader';
 
+import { SharedModule } from './shared/shared.module';
+import { HeaderComponent } from './header/header.component';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -21,7 +24,9 @@ import { TranslateHttpLoader, TRANSLATE_HTTP_LOADER_CONFIG } from '@ngx-translat
         provide: TranslateLoader,
         useClass: TranslateHttpLoader
       }
-    })
+    }),
+    SharedModule, 
+    HeaderComponent
   ],
   providers: [
     provideHttpClient(),
