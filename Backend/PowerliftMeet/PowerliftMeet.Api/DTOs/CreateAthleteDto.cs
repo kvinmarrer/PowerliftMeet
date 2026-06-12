@@ -1,14 +1,11 @@
 namespace PowerliftMeet.Api.DTOs;
 
-public class AthleteDto
+public class CreateAthleteDto
 {
-    public Guid Id { get; set; }
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
     public Guid WeightClassId { get; set; }
-    public WeightClassDto WeightClassDto { get; set; } = null!;
     public Guid FederationId { get; set; }
-    public FederationDto FederationDto { get; set; } = null!;
     public DateTime DateOfBirth { get; set; }
     public string Gender { get; set; } = null!;
 }

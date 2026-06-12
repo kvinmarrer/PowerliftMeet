@@ -1,6 +1,6 @@
-namespace PowerliftMeet.Database.Entities;
+namespace PowerliftMeet.Api.DTOs;
 
-public class Federation
+public class FederationDto
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = null!;

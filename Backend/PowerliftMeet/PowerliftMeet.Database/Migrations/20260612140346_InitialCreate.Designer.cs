@@ -12,8 +12,8 @@ using PowerliftMeet.Database;
 namespace PowerliftMeet.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260612095051_Athlete")]
-    partial class Athlete
+    [Migration("20260612140346_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,17 +27,15 @@ namespace PowerliftMeet.Database.Migrations
 
             modelBuilder.Entity("PowerliftMeet.Database.Entities.Athlete", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("uuid");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<DateOnly>("DateOfBirth")
+                        .HasColumnType("date");
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("FederationId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("FederationId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -51,8 +49,8 @@ namespace PowerliftMeet.Database.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("WeightClassId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("WeightClassId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -65,11 +63,9 @@ namespace PowerliftMeet.Database.Migrations
 
             modelBuilder.Entity("PowerliftMeet.Database.Entities.Federation", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -86,11 +82,9 @@ namespace PowerliftMeet.Database.Migrations
 
             modelBuilder.Entity("PowerliftMeet.Database.Entities.Meet", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
@@ -113,11 +107,9 @@ namespace PowerliftMeet.Database.Migrations
 
             modelBuilder.Entity("PowerliftMeet.Database.Entities.WeightClass", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Weight")
                         .HasColumnType("integer");

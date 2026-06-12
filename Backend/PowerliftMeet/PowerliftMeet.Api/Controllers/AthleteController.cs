@@ -33,4 +33,19 @@ public class AthleteController : ControllerBase
         }
     }
 
+    [HttpPost]
+    public async Task<ActionResult<CreateAthleteDto>> AddAthlete(CreateAthleteDto request)
+    {
+        try
+        {
+            var athlete = await _athleteLogic.AddAthleteAsync(request);
+            return CreatedAtAction(nameof(GetAthletes), new { id = athlete.Id }, athlete);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while adding athlete.");
+            return StatusCode(500, "Internal server error");
+        }
+    }   
+
 }

@@ -2,21 +2,21 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 
-export interface Meet {
+export interface Federation {
   id: string;
   name: string;
-  date: string;
-  location: string;
+  description: string;
 }
 
 @Injectable({ providedIn: 'root' })
-export class MeetService {
-  private apiUrl = `${environment.apiBaseUrl}/meet`;
+export class FederationService {
+    
+  private apiUrl = `${environment.apiBaseUrl}/federation`;
 
   constructor(private http: HttpClient) {}
 
-  getMeets() {
-    return this.http.get<string[]>(this.apiUrl);
+  getFederations() {
+    return this.http.get<Federation[]>(this.apiUrl);
   }
-  
+
 }

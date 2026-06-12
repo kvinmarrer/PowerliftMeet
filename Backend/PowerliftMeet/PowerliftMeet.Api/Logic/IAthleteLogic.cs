@@ -5,4 +5,5 @@ namespace PowerliftMeet.Api.Logic;
 public interface IAthleteLogic
 {
     Task<IEnumerable<AthleteDto>> GetAthletesAsync();
+    Task<AthleteDto> AddAthleteAsync(CreateAthleteDto request);
 }

@@ -2,21 +2,20 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 
-export interface Meet {
+export interface WeightClass {
   id: string;
-  name: string;
-  date: string;
-  location: string;
+  weight: number;
 }
 
 @Injectable({ providedIn: 'root' })
-export class MeetService {
-  private apiUrl = `${environment.apiBaseUrl}/meet`;
+export class WeightClassService {
+    
+  private apiUrl = `${environment.apiBaseUrl}/weightclass`;
 
   constructor(private http: HttpClient) {}
 
-  getMeets() {
-    return this.http.get<string[]>(this.apiUrl);
+  getWeightClasses() {
+    return this.http.get<WeightClass[]>(this.apiUrl);
   }
-  
+
 }

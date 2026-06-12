@@ -1,16 +1,32 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
 
 export interface Athlete {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
-  weightClass: number;
+  federationId: string;
+  federationDto: {
+    id: string;
+    name: string;
+    description: string;
+  };
+  weightClassId: string;
   weightClassDto: {
-    id: number;
+    id: string;
     weight: number;
   };
+  dateOfBirth: string;
+  gender: string;
+}
+
+export interface CreateAthleteRequest {
+  firstName: string;
+  lastName: string;
+  federationId: string;
+  weightClassId: string;
   dateOfBirth: string;
   gender: string;
 }
@@ -22,8 +38,12 @@ export class AthleteService {
 
   constructor(private http: HttpClient) {}
 
-  getAthletes() {
+  getAthletes(): Observable<Athlete[]> {
     return this.http.get<Athlete[]>(this.apiUrl);
+  }
+
+  addAthlete(request: CreateAthleteRequest): Observable<Athlete> {
+    return this.http.post<Athlete>(this.apiUrl, request);
   }
 
 }

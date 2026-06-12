@@ -12,13 +12,20 @@ public static class MappingExtensions
             Id = athlete.Id,
             FirstName = athlete.FirstName,
             LastName = athlete.LastName,
-            WeightClass = athlete.WeightClassId,
+            WeightClassId = athlete.WeightClassId,
             WeightClassDto = new WeightClassDto
             {
                 Id = athlete.WeightClass.Id,
                 Weight = athlete.WeightClass.Weight
             },
-            DateOfBirth = athlete.DateOfBirth,
+            FederationId = athlete.FederationId,
+            FederationDto = new FederationDto
+            {
+                Id = athlete.Federation.Id,
+                Name = athlete.Federation.Name,
+                Description = athlete.Federation.Description
+            },
+            DateOfBirth = athlete.DateOfBirth.ToDateTime(TimeOnly.MinValue),
             Gender = athlete.Gender
         };
     }
@@ -43,6 +50,25 @@ public static class MappingExtensions
             Date = dto.Date,
             Location = dto.Location,
             Description = dto.Description
+        };
+    }
+
+    public static WeightClassDto ToDto(this WeightClass weightClass)
+    {
+        return new WeightClassDto
+        {
+            Id = weightClass.Id,
+            Weight = weightClass.Weight
+        };
+    }
+
+    public static FederationDto ToDto(this Federation federation)
+    {
+        return new FederationDto
+        {
+            Id = federation.Id,
+            Name = federation.Name,
+            Description = federation.Description
         };
     }
 }
