@@ -22,11 +22,15 @@ export class AthletesPage implements OnInit {
 
   constructor(private athleteService: AthleteService, private weightClassService: WeightClassService, private federationService: FederationService) { }
 
-  ngOnInit() {
+  loadAthletes() {
     this.athleteService.getAthletes().subscribe({
       next: (data) => this.athletes = data,
       error: (err) => console.error('Error fetching athletes', err)
     });
+  }
+
+  ngOnInit() {
+    this.loadAthletes();
     this.weightClassService.getWeightClasses().subscribe({
       next: (data) => this.weightClasses = data,
       error: (err) => console.error('Error fetching weight classes', err)
@@ -64,7 +68,7 @@ export class AthletesPage implements OnInit {
   }
 
   // Modal methods
-  @ViewChild(IonModal) modal!: IonModal;
+  @ViewChild('addModal') modal!: IonModal;
 
   firstName!: string;
   lastName!: string;
@@ -94,14 +98,57 @@ export class AthletesPage implements OnInit {
       const athlete = event.detail.data;
       this.athleteService.addAthlete(athlete).subscribe({
         next: () => {
-          this.athleteService.getAthletes().subscribe({
-            next: (data) => this.athletes = data,
-            error: (err) => console.error('Error fetching athletes', err)
-          });
+          this.loadAthletes();
         },
         error: (err) => console.error('Error adding athlete', err)
       });
     }
+  }
+
+  // View athlete details
+  @ViewChild('editModal') editModal!: IonModal;
+
+  selectedAthlete: any = null;
+
+  // Edit field bindings
+  editFirstName = '';
+  editLastName = '';
+  editDateOfBirth = '';
+  editWeightClass: number | null = null;
+  editFederation: number | null = null;
+  editGender = '';
+
+  openEditModal(athlete: any) {
+    this.selectedAthlete = athlete;
+
+    // Pre-populate fields
+    this.editFirstName = athlete.firstName;
+    this.editLastName = athlete.lastName;
+    this.editDateOfBirth = athlete.dateOfBirth;
+    this.editWeightClass = athlete.weightClassDto.id;
+    this.editFederation = athlete.federationDto.id;
+    this.editGender = athlete.gender;
+
+    this.editModal.present();
+  }
+
+  confirmEdit() {
+    /* Call your update service here
+    this.athleteService.update(this.selectedAthlete.id, {
+      firstName: this.editFirstName,
+      lastName: this.editLastName,
+      dateOfBirth: this.editDateOfBirth,
+      weightClassId: this.editWeightClass,
+      federationId: this.editFederation,
+      gender: this.editGender,
+    }).subscribe(() => {
+      this.editModal.dismiss();
+      this.loadAthletes();
+    });*/
+  }
+
+  onEditDismiss(event: any) {
+    this.selectedAthlete = null;
   }
 
 }
