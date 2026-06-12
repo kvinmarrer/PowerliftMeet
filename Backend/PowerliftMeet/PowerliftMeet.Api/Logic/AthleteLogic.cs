@@ -28,7 +28,6 @@ public class AthleteLogic : IAthleteLogic
     {
         var athlete = new Athlete
         {
-            Id = Guid.NewGuid(),
             FirstName = request.FirstName,
             LastName = request.LastName,
             WeightClassId = request.WeightClassId,
@@ -38,6 +37,12 @@ public class AthleteLogic : IAthleteLogic
         };
         _dbContext.Athletes.Add(athlete);
         await _dbContext.SaveChangesAsync();
-        return athlete.ToDto();
+
+        var createdAthlete = await _dbContext.Athletes
+            .Include(a => a.WeightClass)
+            .Include(a => a.Federation)
+            .FirstOrDefaultAsync(a => a.Id == athlete.Id);
+
+        return createdAthlete?.ToDto() ?? athlete.ToDto();
     }
 }

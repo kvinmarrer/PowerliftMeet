@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Athlete
 {
     [Key]
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
     [ForeignKey("Federation")]
     public Guid FederationId { get; set; }
     public Federation Federation { get; set; } = null!;
