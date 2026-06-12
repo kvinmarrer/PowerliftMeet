@@ -1,11 +1,11 @@
 <ion-app>
   <ion-split-pane contentId="main-content" when="md">
 
-    <ion-menu contentId="main-content">
+    <ion-menu contentId="main-content" class="split-pane">
       <ion-header>
         <ion-toolbar>
           <img src="/assets/icon/kdks.png" alt="logo" slot="start" class="header__logo" />
-          <ion-title>PowerliftMeet</ion-title>
+          <ion-title class="header__title">PowerliftMeet</ion-title>
         </ion-toolbar>
       </ion-header>
 
@@ -59,7 +59,7 @@
       </ion-content>
     </ion-menu>
 
-    <ion-router-outlet id="main-content"></ion-router-outlet>
+    <ion-router-outlet id="main-content" class="split-pane-content"></ion-router-outlet>
 
   </ion-split-pane>
 </ion-app>

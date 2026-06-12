@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -7,10 +8,12 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [IonicModule, TranslateModule],
+  imports: [IonicModule, TranslateModule, CommonModule],
 })
 export class HeaderComponent {
+  @Input() icon?: string;
   @Input() title?: string;
+  @Input() subtitle?: string;
   translate?: TranslateService;
 
   constructor(translateService: TranslateService) {

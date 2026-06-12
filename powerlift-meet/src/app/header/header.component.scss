@@ -4,50 +4,22 @@
 .header {
   &__container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+
+    &__titles {
+      display: flex;
+
+      &__subtitle {
+        margin-right: 2.5rem;
+      }
+
+      &__icon {
+        margin-left: 1.5rem;
+      }
+    }
   }
 
-  &__logo {
-    width: 15rem;
-  }
 
-  &__language-buttons {
-    width: min-content;
-    height: 100%;
-  }
-
-  &__language-button {
-    width: clamp(2.5rem, 10vw, 15rem);
-  }
-
-  &__language-picker,
-  &__language-picker-column {
-    display: none;
-    height: 6.25rem;
-  }
-
-  &__short-text {
-    display: none;
-  }
-
-  &__language-icon {
-    height: 2rem;
-  }
-}
-
-.toolbar-container {
-  display: flex;
-  flex: unset;
-  order: unset;
-}
-
-.quick-nav {
-  display: flex;
-  flex-direction: column;
-  width: min-content;
-  gap: 8px;
-  padding: 12px 16px;
-  justify-content: flex-start; 
 }
 
 @media screen and (width < map.get(variables.$size-map, "desktop")) {

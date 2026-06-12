@@ -11,6 +11,9 @@ export class AthletesPage implements OnInit {
 
   athletes: string[] = [];
 
+  search: string = '';
+  filter: string = 'all';
+
   constructor(private athleteService: AthleteService) { }
 
   ngOnInit() {
@@ -18,6 +21,13 @@ export class AthletesPage implements OnInit {
       next: (data) => this.athletes = data,
       error: (err) => console.error('Error fetching athletes', err)
     });
+  }
+
+  filterAthletes() {
+  }
+
+  getStatusColor(name: string) {
+    
   }
 
 }

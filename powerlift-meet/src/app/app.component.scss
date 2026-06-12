@@ -1,3 +1,10 @@
+@use "sass:map";
+@use "src/app/shared/variables" as variables;
+
+ion-split-pane {
+  --side-width: 20%;
+}
+
 .header__logo {
     width: 50%;
     font-size: 1.5rem;
@@ -16,9 +23,29 @@
         justify-content: flex-start;
         font-weight: 500;
     }
+
+    * {
+        font-size: 1.4rem;
+    }
+}
+
+.header__title {
+    text-align: center;
 }
 
 .active-nav {
     --color: var(--ion-color-primary);
     --background: rgba(var(--ion-color-primary-rgb), 0.1);
+}
+
+
+@media screen and (width < map.get(variables.$size-map, "desktop")) {
+
+}
+
+@media screen and (width < map.get(variables.$size-map, "handy")) {
+    .header__title {
+        text-align: center;
+        font-size: 0.9rem;
+    }
 }

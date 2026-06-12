@@ -1,4 +1,4 @@
-<app-header title="{{ 'ATHLETES.TITLE'|translate }}"></app-header>
+<app-header icon="people" title="{{ 'ATHLETES.TITLE'|translate }}" subtitle="{{ athletes.length }}"></app-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
@@ -7,9 +7,60 @@
     </ion-toolbar>
   </ion-header>
 
+<!-- SEARCH -->
+  <ion-searchbar
+    [(ngModel)]="search"
+    (ionInput)="filterAthletes()"
+    placeholder="Name oder Verein suchen...">
+  </ion-searchbar>
+
+  <!-- FILTERS -->
+  <ion-segment [(ngModel)]="filter" (ionChange)="filterAthletes()" class="filter_segment">
+    <ion-segment-button value="all" class="filter_button--all">
+      <ion-label>Alle</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="men" class="filter_button--men">
+      <ion-label>Herren</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="women" class="filter_button--women">
+      <ion-label>Damen</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="raw" class="filter_button--raw">
+      <ion-label>Raw</ion-label>
+    </ion-segment-button>
+
+  </ion-segment>
+
+  <!-- LIST -->
   <ion-list>
+
     <ion-item *ngFor="let athlete of athletes">
-      {{ athlete }}
+
+      <!-- AVATAR -->
+      <ion-avatar slot="start">
+        <div class="avatar">
+          {{ athlete }}
+        </div>
+      </ion-avatar>
+
+      <!-- MAIN TEXT -->
+      <ion-label>
+        <h2>{{ athlete }}</h2>
+        <p>
+          {{ athlete }} · {{ athlete }} · {{ athlete }}
+        </p>
+      </ion-label>
+
+      <ion-badge
+        slot="end"
+        [color]="getStatusColor(athlete)">
+        {{ athlete }}
+      </ion-badge>
+
     </ion-item>
+
   </ion-list>
 </ion-content>
