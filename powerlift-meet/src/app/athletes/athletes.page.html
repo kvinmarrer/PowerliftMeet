@@ -37,27 +37,27 @@
   <!-- LIST -->
   <ion-list>
 
-    <ion-item *ngFor="let athlete of athletes">
+    <ion-item *ngFor="let athlete of athletes" class="athlete-item">
 
       <!-- AVATAR -->
       <ion-avatar slot="start">
         <div class="avatar">
-          {{ athlete }}
+          {{ athlete.firstName.charAt(0) }}{{ athlete.lastName.charAt(0) }}
         </div>
       </ion-avatar>
 
       <!-- MAIN TEXT -->
       <ion-label>
-        <h2>{{ athlete }}</h2>
+        <h2>{{ athlete.firstName }} {{ athlete.lastName }}</h2>
         <p>
-          {{ athlete }} · {{ athlete }} · {{ athlete }}
+          {{ athlete.weightClassDto.weightClass }} kg · {{ athlete.dateOfBirth | date:'dd.MM.yyyy' }} · {{ athlete.gender }}
         </p>
       </ion-label>
 
       <ion-badge
         slot="end"
-        [color]="getStatusColor(athlete)">
-        {{ athlete }}
+        [color]="getStatusColor(athlete.firstName + ' ' + athlete.lastName)">
+        {{ athlete.firstName }} {{ athlete.lastName }}
       </ion-badge>
 
     </ion-item>

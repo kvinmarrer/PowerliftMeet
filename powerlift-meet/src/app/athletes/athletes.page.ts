@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AthleteService } from '../services/athlete.service';
+import { Athlete, AthleteService } from '../services/athlete.service';
 
 @Component({
   selector: 'app-athletes',
@@ -9,7 +9,7 @@ import { AthleteService } from '../services/athlete.service';
 })
 export class AthletesPage implements OnInit {
 
-  athletes: string[] = [];
+  athletes: Athlete[] = [];
 
   search: string = '';
   filter: string = 'all';
