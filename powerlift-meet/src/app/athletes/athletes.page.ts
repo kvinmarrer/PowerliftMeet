@@ -23,11 +23,30 @@ export class AthletesPage implements OnInit {
     });
   }
 
+  getAge(dateOfBirth: string): number {
+    const birthDate = new Date(dateOfBirth);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
+  getAgeClass(dateOfBirth: string): string {
+    const age = this.getAge(dateOfBirth);
+
+    if (age <= 18) return 'Sub-Junior';
+    if (age <= 23) return 'Junior';
+    if (age <= 39) return 'Open';
+    return 'Master';
+  }
+
   filterAthletes() {
   }
 
   getStatusColor(name: string) {
-    
   }
 
 }

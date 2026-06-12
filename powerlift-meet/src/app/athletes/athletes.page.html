@@ -11,25 +11,21 @@
   <ion-searchbar
     [(ngModel)]="search"
     (ionInput)="filterAthletes()"
-    placeholder="Name oder Verein suchen...">
+    placeholder="{{ 'ATHLETES.SEARCH.PLACEHOLDER'|translate }}">
   </ion-searchbar>
 
   <!-- FILTERS -->
   <ion-segment [(ngModel)]="filter" (ionChange)="filterAthletes()" class="filter_segment">
     <ion-segment-button value="all" class="filter_button--all">
-      <ion-label>Alle</ion-label>
+      <ion-label>{{ 'ATHLETES.FILTER.ALL'|translate }}</ion-label>
     </ion-segment-button>
 
     <ion-segment-button value="men" class="filter_button--men">
-      <ion-label>Herren</ion-label>
+      <ion-label>{{ 'ATHLETES.FILTER.MEN'|translate }}</ion-label>
     </ion-segment-button>
 
     <ion-segment-button value="women" class="filter_button--women">
-      <ion-label>Damen</ion-label>
-    </ion-segment-button>
-
-    <ion-segment-button value="raw" class="filter_button--raw">
-      <ion-label>Raw</ion-label>
+      <ion-label>{{ 'ATHLETES.FILTER.WOMEN'|translate }}</ion-label>
     </ion-segment-button>
 
   </ion-segment>
@@ -50,7 +46,7 @@
       <ion-label>
         <h2>{{ athlete.firstName }} {{ athlete.lastName }}</h2>
         <p>
-          {{ athlete.weightClassDto.weightClass }} kg · {{ athlete.dateOfBirth | date:'dd.MM.yyyy' }} · {{ athlete.gender }}
+          {{ athlete.weightClassDto.weight }} kg · {{ getAgeClass(athlete.dateOfBirth) }} · {{ athlete.gender }}
         </p>
       </ion-label>
 

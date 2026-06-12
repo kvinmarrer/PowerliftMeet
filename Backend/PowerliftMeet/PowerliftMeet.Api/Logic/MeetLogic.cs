@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using PowerliftMeet.Database;
 using PowerliftMeet.Database.Entities;
 using PowerliftMeet.Api.DTOs;
+using PowerliftMeet.Api.Extensions;
 
 namespace PowerliftMeet.Api.Logic;
 
@@ -16,31 +17,18 @@ public class MeetLogic : IMeetLogic
 
     public async Task<IEnumerable<MeetDto>> GetMeetsAsync()
     {
-        return await _dbContext.Meets
-            .Select(m => new MeetDto
-            {
-                Id = m.Id,
-                Name = m.Name,
-                Date = m.Date,
-                Location = m.Location,
-                Description = m.Description
-            })
+        var meets = await _dbContext.Meets
             .ToListAsync();
+        return meets.Select(m => m.ToDto());
     }
 
-    public async Task<CreateMeetDto> CreateMeetAsync(CreateMeetDto request)
+    public async Task<MeetDto> CreateMeetAsync(CreateMeetDto request)
     {
-        var meet = new Meet
-        {
-            Name = request.Name,
-            Date = request.Date,
-            Location = request.Location,
-            Description = request.Description
-        };
+        var meet = request.ToEntity();
 
         _dbContext.Meets.Add(meet);
         await _dbContext.SaveChangesAsync();
 
-        return request;
+        return meet.ToDto();
     }
 }

@@ -5,5 +5,5 @@ namespace PowerliftMeet.Api.Logic;
 public interface IMeetLogic
 {
     Task<IEnumerable<MeetDto>> GetMeetsAsync();
-    Task<CreateMeetDto> CreateMeetAsync(CreateMeetDto request);
+    Task<MeetDto> CreateMeetAsync(CreateMeetDto request);
 }

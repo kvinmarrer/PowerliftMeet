@@ -1,0 +1,8 @@
+using PowerliftMeet.Api.DTOs;
+
+namespace PowerliftMeet.Api.Logic;
+
+public interface IAthleteLogic
+{
+    Task<IEnumerable<AthleteDto>> GetAthletesAsync();
+}

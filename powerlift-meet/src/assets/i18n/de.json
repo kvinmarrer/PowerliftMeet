@@ -9,7 +9,15 @@
   },
   "ATHLETES": {
     "TITLE": "Athleten",
-    "SUBTITLE": "Liste der Athleten"
+    "SUBTITLE": "Liste der Athleten",
+    "SEARCH": {
+      "PLACEHOLDER": "Name suchen..."
+    },
+    "FILTER": {
+      "ALL": "Alle",
+      "MEN": "Herren",
+      "WOMEN": "Damen"
+    }
   },
   "WEIGH_IN": {
     "TITLE": "Wiegen",

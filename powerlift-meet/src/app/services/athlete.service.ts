@@ -9,7 +9,7 @@ export interface Athlete {
   weightClass: number;
   weightClassDto: {
     id: number;
-    weightClass: number;
+    weight: number;
   };
   dateOfBirth: string;
   gender: string;

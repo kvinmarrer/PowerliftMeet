@@ -10,25 +10,27 @@ public class AthleteController : ControllerBase
 {
 
     private readonly ILogger<AthleteController> _logger; 
+    private readonly IAthleteLogic _athleteLogic;
 
-    public AthleteController(ILogger<AthleteController> logger)
+    public AthleteController(ILogger<AthleteController> logger, IAthleteLogic athleteLogic)
     {
         _logger = logger;
+        _athleteLogic = athleteLogic;
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AthleteDto>>> GetAthletes()
     {
-        // Placeholder for actual data retrieval logic
-        var athletes = new List<AthleteDto>
+        try
         {
-            new AthleteDto { Id = 1, FirstName = "Kevin", LastName = "Marrer", WeightClass = 1, WeightClassDto = new WeightClassDto { Id = 1, WeightClass = 74 }, DateOfBirth = DateTime.Now, Gender = "Male" },
-            new AthleteDto { Id = 2, FirstName = "John", LastName = "Pork", WeightClass = 2, WeightClassDto = new WeightClassDto { Id = 2, WeightClass = 63 }, DateOfBirth = DateTime.Now, Gender = "Female" },
-            new AthleteDto { Id = 3, FirstName = "Tung", LastName = "Sahur", WeightClass = 3, WeightClassDto = new WeightClassDto { Id = 3, WeightClass = 83 }, DateOfBirth = DateTime.Now, Gender = "Male" }
-        };
-        
-        return Ok(athletes);
-        
+            var athletes = await _athleteLogic.GetAthletesAsync();
+            return Ok(athletes);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while fetching athletes.");
+            return StatusCode(500, "Internal server error");
+        }
     }
 
 }
