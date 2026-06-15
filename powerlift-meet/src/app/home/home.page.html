@@ -8,8 +8,126 @@
   </ion-header>
 
   <ion-list>
-    <ion-item *ngFor="let meet of meets">
-      {{ meet.date }}
+    <ion-item *ngFor="let meet of meets" >
+      <ion-label>
+        <h2>{{ meet.name }}</h2>
+        <p>{{ meet.date | date:'longDate' }} - {{ meet.location }}</p>
+      </ion-label>
+      <ion-button slot="end" fill="clear" (click)="editMeet(meet)">
+        <ion-icon name="create-outline" color="primary"></ion-icon>
+      </ion-button>
+      <ion-button slot="end" fill="clear" (click)="deleteMeet(meet.id)">
+        <ion-icon name="trash-outline" color="danger"></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-list>
+
+  <ion-button id="open-meet-add-modal" expand="block" class="meet-modal-button">{{ 'MEET.ADD_MEET' | translate }}</ion-button>
+  <ion-modal trigger="open-meet-add-modal" class="meet-modal" (willDismiss)="onWillDismiss($event)" #addMeetModal>
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">{{ 'MEET.CANCEL' | translate }}</ion-button>
+          </ion-buttons>
+          <ion-title>{{ 'MEET.ADD_MEET' | translate }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">{{ 'MEET.CONFIRM' | translate }}</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input
+            label="{{ 'MEET.NAME' | translate }}"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="{{ 'MEET.NAME' | translate }}"
+            [(ngModel)]="name"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="{{ 'MEET.LOCATION' | translate }}"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="{{ 'MEET.LOCATION' | translate }}"
+            [(ngModel)]="location"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="{{ 'MEET.DATE' | translate }}"
+            labelPlacement="stacked"
+            type="date"              
+            placeholder="{{ 'MEET.DATE' | translate }}"
+            [(ngModel)]="date"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="{{ 'MEET.DESCRIPTION' | translate }}"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="{{ 'MEET.DESCRIPTION' | translate }}"
+            [(ngModel)]="description"
+          ></ion-input>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal trigger="open-meet-edit-modal" class="meet-modal" (willDismiss)="onWillDismiss($event)" #editMeetModal>
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancelEdit()">{{ 'MEET.CANCEL' | translate }}</ion-button>
+          </ion-buttons>
+          <ion-title>{{ 'MEET.EDIT_MEET' | translate }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirmEdit()" [strong]="true">{{ 'MEET.CONFIRM' | translate }}</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input
+            label="{{ 'MEET.NAME' | translate }}"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="{{ 'MEET.NAME' | translate }}"
+            [(ngModel)]="editName"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="{{ 'MEET.LOCATION' | translate }}"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="{{ 'MEET.LOCATION' | translate }}"
+            [(ngModel)]="editLocation"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="{{ 'MEET.DATE' | translate }}"
+            labelPlacement="stacked"
+            type="date"              
+            placeholder="{{ 'MEET.DATE' | translate }}"
+            [(ngModel)]="editDate"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="{{ 'MEET.DESCRIPTION' | translate }}"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="{{ 'MEET.DESCRIPTION' | translate }}"
+            [(ngModel)]="editDescription"
+          ></ion-input>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

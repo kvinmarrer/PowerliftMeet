@@ -9,5 +9,5 @@ public class AthleteDto
     public ClubDto ClubDto { get; set; } = null!;
     public Guid GenderId { get; set; }
     public GenderDto GenderDto { get; set; } = null!;
-    public DateTime DateOfBirth { get; set; }
+    public DateOnly DateOfBirth { get; set; }
 }

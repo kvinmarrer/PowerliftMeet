@@ -84,7 +84,7 @@ export class AthletesPage implements OnInit {
   }
 
   // Modal methods
-  @ViewChild('addModal') modal!: IonModal;
+  @ViewChild('addAthleteModal') modal!: IonModal;
 
   firstName!: string;
   lastName!: string;
@@ -120,7 +120,7 @@ export class AthletesPage implements OnInit {
   }
 
   // View athlete details
-  @ViewChild('editModal') editModal!: IonModal;
+  @ViewChild('editAthleteModal') editModal!: IonModal;
 
   selectedAthlete: any = null;
 
@@ -137,7 +137,7 @@ export class AthletesPage implements OnInit {
     // Pre-populate fields
     this.editFirstName = athlete.firstName;
     this.editLastName = athlete.lastName;
-    this.editDateOfBirth = new Date(athlete.dateOfBirth).toISOString().split('T')[0]; 
+    this.editDateOfBirth = athlete.dateOfBirth;
     this.editGender = athlete.genderDto.id;
     this.editClub = athlete.clubDto.id;
 

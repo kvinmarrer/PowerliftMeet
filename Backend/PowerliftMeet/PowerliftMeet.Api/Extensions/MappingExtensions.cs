@@ -16,7 +16,7 @@ public static class MappingExtensions
             GenderDto = athlete.Gender.ToDto(),
             ClubId = athlete.ClubId,
             ClubDto = athlete.Club.ToDto(),
-            DateOfBirth = athlete.DateOfBirth.ToDateTime(TimeOnly.MinValue),
+            DateOfBirth = athlete.DateOfBirth,
         };
     }
 

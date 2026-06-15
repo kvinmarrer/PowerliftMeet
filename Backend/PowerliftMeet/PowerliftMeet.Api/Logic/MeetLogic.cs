@@ -29,4 +29,35 @@ public class MeetLogic : IMeetLogic
 
         return meet.ToDto();
     }
+
+    public async Task<MeetDto> EditMeetAsync(Guid id, CreateMeetDto meet)
+    {
+        var existingMeet = await _dbContext.Meets.FindAsync(id);
+
+        if (existingMeet == null)
+        {
+            throw new KeyNotFoundException($"Meet with ID {id} not found.");
+        }
+
+        existingMeet.Name = meet.Name;
+        existingMeet.Location = meet.Location;
+        existingMeet.Date = meet.Date;
+        existingMeet.Description = meet.Description;
+
+        await _dbContext.SaveChangesAsync();
+
+        return existingMeet.ToDto();
+    }
+
+    public async Task DeleteMeetAsync(Guid id)
+    {
+        var meet = await _dbContext.Meets.FindAsync(id);
+        if (meet == null)
+        {
+            throw new KeyNotFoundException($"Meet with ID {id} not found.");
+        }
+
+        _dbContext.Meets.Remove(meet);
+        await _dbContext.SaveChangesAsync();
+    }
 }

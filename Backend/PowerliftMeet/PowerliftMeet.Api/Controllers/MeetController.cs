@@ -52,4 +52,39 @@ public class MeetController : ControllerBase
             return StatusCode(500, "An error occurred while creating the meet.");
         }
     }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<MeetDto>> EditMeet(Guid id, CreateMeetDto meet)  
+    {
+        try
+        {
+            if (meet == null)
+            {
+                return BadRequest("Meet data is required.");
+            }
+
+            var updatedMeet = await _meetLogic.EditMeetAsync(id, meet);
+            return Ok(updatedMeet);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error editing meet");
+            return StatusCode(500, "An error occurred while editing the meet.");
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteMeet(Guid id)
+    {
+        try
+        {
+            await _meetLogic.DeleteMeetAsync(id);
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error deleting meet");
+            return StatusCode(500, "An error occurred while deleting the meet.");
+        }
+    }
 }

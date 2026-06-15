@@ -7,6 +7,18 @@
     "TITLE": "Start",
     "SUBTITLE": "Das ist die Startseite"
   },
+  "MEET": {
+    "TITLE": "Wettkampf",
+    "SUBTITLE": "Details zum Wettkampf",
+    "DATE": "Datum",
+    "LOCATION": "Ort",
+    "DESCRIPTION": "Beschreibung",
+    "EDIT_MEET": "Wettkampf bearbeiten",
+    "CANCEL": "Abbrechen",
+    "CONFIRM": "Bestätigen",
+    "NAME": "Name",
+    "ADD_MEET": "Wettkampf hinzufügen"
+  },
   "ATHLETES": {
     "TITLE": "Athleten",
     "SUBTITLE": "Liste der Athleten",

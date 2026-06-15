@@ -31,7 +31,7 @@ public class AthleteLogic : IAthleteLogic
             FirstName = request.FirstName,
             LastName = request.LastName,
             ClubId = request.ClubId,
-            DateOfBirth = DateOnly.FromDateTime(request.DateOfBirth),
+            DateOfBirth = request.DateOfBirth,
             GenderId = request.GenderId
         };
         _dbContext.Athletes.Add(athlete);
@@ -60,7 +60,7 @@ public class AthleteLogic : IAthleteLogic
 
         athlete.FirstName = request.FirstName;
         athlete.LastName = request.LastName;
-        athlete.DateOfBirth = DateOnly.FromDateTime(request.DateOfBirth);
+        athlete.DateOfBirth = request.DateOfBirth;
         athlete.GenderId = request.GenderId;
         athlete.ClubId = request.ClubId;
 

@@ -7,6 +7,18 @@
     "TITLE": "Home",
     "SUBTITLE": "This is the home page"
   },
+  "MEET": {
+    "TITLE": "Meet",
+    "SUBTITLE": "Details about the meet",
+    "DATE": "Date",
+    "LOCATION": "Location",
+    "DESCRIPTION": "Description",
+    "EDIT_MEET": "Edit Meet",
+    "CANCEL": "Cancel",
+    "CONFIRM": "Confirm",
+    "NAME": "Name",
+    "ADD_MEET": "Add Meet"
+  },
   "ATHLETES": {
     "TITLE": "Athletes",
     "SUBTITLE": "List of athletes",
