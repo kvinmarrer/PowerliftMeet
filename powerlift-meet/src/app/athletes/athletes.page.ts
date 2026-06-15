@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Athlete, AthleteService } from '../services/athlete.service';
 import { Club, ClubService } from '../services/club.service';
-import { WeightClass, WeightClassService } from '../services/weightclass.service';
+import { Gender, GenderService } from '../services/gender.service';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { IonModal } from '@ionic/angular';
 
@@ -15,13 +15,13 @@ export class AthletesPage implements OnInit {
 
   athletes: Athlete[] = [];
   filteredAthletes: Athlete[] = [];
-  weightClasses: WeightClass[] = [];
+  genders: Gender[] = [];
   clubs: Club[] = [];
 
   search: string = '';
   filter: string = 'all';
 
-  constructor(private athleteService: AthleteService, private weightClassService: WeightClassService, private clubService: ClubService) { }
+  constructor(private athleteService: AthleteService, private genderService: GenderService, private clubService: ClubService) { }
 
   loadAthletes() {
     this.athleteService.getAthletes().subscribe({
@@ -35,9 +35,9 @@ export class AthletesPage implements OnInit {
 
   ngOnInit() {
     this.loadAthletes();
-    this.weightClassService.getWeightClasses().subscribe({
-      next: (data) => this.weightClasses = data,
-      error: (err) => console.error('Error fetching weight classes', err)
+    this.genderService.getGenders().subscribe({
+      next: (data) => this.genders = data,
+      error: (err) => console.error('Error fetching genders', err)
     });
     this.clubService.getClubs().subscribe({
       next: (data) => this.clubs = data,
@@ -73,9 +73,9 @@ export class AthletesPage implements OnInit {
         athlete.lastName.toLowerCase().includes(searchTerm);
       const matchesFilter = 
         this.filter === 'all' ||
-        (this.filter === 'men' && athlete.gender === 'Male') ||
-        (this.filter === 'women' && athlete.gender === 'Female') ||
-        (this.filter === 'other' && athlete.gender === 'Other');
+        (this.filter === 'men' && athlete.genderDto.name === 'Male') ||
+        (this.filter === 'women' && athlete.genderDto.name === 'Female') ||
+        (this.filter === 'other' && athlete.genderDto.name === 'Other');
       return matchesSearch && matchesFilter;
     });
   }
@@ -89,9 +89,8 @@ export class AthletesPage implements OnInit {
   firstName!: string;
   lastName!: string;
   dateOfBirth!: string;
-  weightClass!: string;
+  gender!: string;
   club!: string;
-  selectedGender!: string;
 
   cancel() {
     this.modal.dismiss(null, 'cancel');
@@ -102,9 +101,8 @@ export class AthletesPage implements OnInit {
       firstName: this.firstName,
       lastName: this.lastName,
       dateOfBirth: this.dateOfBirth,
-      weightClassId: this.weightClass,
+      genderId: this.gender,
       clubId: this.club,
-      gender: this.selectedGender
     };
     this.modal.dismiss(athlete, 'confirm');
   }
@@ -130,9 +128,8 @@ export class AthletesPage implements OnInit {
   editFirstName = '';
   editLastName = '';
   editDateOfBirth = '';
-  editWeightClass = '';
-  editClub = '';
   editGender = '';
+  editClub = '';
 
   openEditModal(athlete: any) {
     this.selectedAthlete = athlete;
@@ -141,9 +138,8 @@ export class AthletesPage implements OnInit {
     this.editFirstName = athlete.firstName;
     this.editLastName = athlete.lastName;
     this.editDateOfBirth = new Date(athlete.dateOfBirth).toISOString().split('T')[0]; 
-    this.editWeightClass = athlete.weightClassDto.id;
+    this.editGender = athlete.genderDto.id;
     this.editClub = athlete.clubDto.id;
-    this.editGender = athlete.gender;
 
     this.editModal.present();
   }
@@ -154,9 +150,8 @@ export class AthletesPage implements OnInit {
       firstName: this.editFirstName,
       lastName: this.editLastName,
       dateOfBirth: this.editDateOfBirth,
-      weightClassId: this.editWeightClass,
+      genderId: this.editGender,
       clubId: this.editClub,
-      gender: this.editGender,
     }).subscribe(() => {
       this.editModal.dismiss();
       this.loadAthletes();

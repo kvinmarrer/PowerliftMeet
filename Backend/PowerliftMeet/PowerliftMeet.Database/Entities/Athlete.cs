@@ -1,4 +1,5 @@
 namespace PowerliftMeet.Database.Entities;
+
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,12 +10,10 @@ public class Athlete
     [ForeignKey("Club")]
     public Guid ClubId { get; set; }
     public Club Club { get; set; } = null!;
-    [ForeignKey("WeightClass")]
-    public Guid WeightClassId { get; set; }
-    public WeightClass WeightClass { get; set; } = null!;
+    [ForeignKey("Gender")]
+    public Guid GenderId { get; set; }
+    public Gender Gender { get; set; } = null!;
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
     public DateOnly DateOfBirth { get; set; }
-    public string Gender { get; set; } = null!;
-
 }

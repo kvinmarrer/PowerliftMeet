@@ -12,12 +12,11 @@ public static class MappingExtensions
             Id = athlete.Id,
             FirstName = athlete.FirstName,
             LastName = athlete.LastName,
-            WeightClassId = athlete.WeightClassId,
-            WeightClassDto = athlete.WeightClass.ToDto(),
+            GenderId = athlete.GenderId,
+            GenderDto = athlete.Gender.ToDto(),
             ClubId = athlete.ClubId,
             ClubDto = athlete.Club.ToDto(),
             DateOfBirth = athlete.DateOfBirth.ToDateTime(TimeOnly.MinValue),
-            Gender = athlete.Gender
         };
     }
 
@@ -41,6 +40,15 @@ public static class MappingExtensions
             Date = dto.Date,
             Location = dto.Location,
             Description = dto.Description
+        };
+    }
+
+    public static GenderDto ToDto(this Gender gender)
+    {
+        return new GenderDto
+        {
+            Id = gender.Id,
+            Name = gender.Name
         };
     }
 

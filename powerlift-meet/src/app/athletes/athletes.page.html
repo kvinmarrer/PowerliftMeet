@@ -50,7 +50,7 @@
       <ion-label>
         <h2>{{ athlete.firstName }} {{ athlete.lastName }}</h2>
         <p>
-          {{ athlete.weightClassDto.weight }} kg · {{ getAgeClass(athlete.dateOfBirth) }} · {{ athlete.gender }}
+          {{ getAgeClass(athlete.dateOfBirth) }} · {{ athlete.genderDto.name }}
         </p>
       </ion-label>
 
@@ -96,14 +96,6 @@
             [(ngModel)]="editDateOfBirth"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-select label="{{ 'ATHLETES.WEIGHT_CLASS' | translate }}" labelPlacement="stacked"
-            [(ngModel)]="editWeightClass">
-            <ion-select-option *ngFor="let wc of weightClasses" [value]="wc.id">
-              {{ wc.weight }} kg
-            </ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
           <ion-select label="{{ 'ATHLETES.CLUB' | translate }}" labelPlacement="stacked"
             [(ngModel)]="editClub">
             <ion-select-option *ngFor="let club of clubs" [value]="club.id">
@@ -114,9 +106,9 @@
         <ion-item>
           <ion-select label="{{ 'ATHLETES.GENDER' | translate }}" labelPlacement="stacked"
             [(ngModel)]="editGender">
-            <ion-select-option value="Male">{{ 'ATHLETES.GENDER_SELECTION.MALE' | translate }}</ion-select-option>
-            <ion-select-option value="Female">{{ 'ATHLETES.GENDER_SELECTION.FEMALE' | translate }}</ion-select-option>
-            <ion-select-option value="Other">{{ 'ATHLETES.GENDER_SELECTION.OTHER' | translate }}</ion-select-option>
+            <ion-select-option *ngFor="let gender of genders" [value]="gender.id">
+              {{ gender.name }}
+            </ion-select-option>
           </ion-select>
         </ion-item>
       </ion-content>
@@ -168,24 +160,6 @@
           </ion-item>
           <ion-item>
             <ion-select
-              label="{{ 'ATHLETES.WEIGHT_CLASS' | translate }}"
-              labelPlacement="stacked"
-              type="text"              
-              placeholder="{{ 'ATHLETES.WEIGHT_CLASS' | translate }}"
-              [(ngModel)]="weightClass"
-            >
-
-            <ion-select-option
-              *ngFor="let wc of weightClasses"
-              [value]="wc.id"
-            >
-              {{ wc.weight }} kg
-            </ion-select-option>
-
-            </ion-select>
-          </ion-item>
-          <ion-item>
-            <ion-select
               label="{{ 'ATHLETES.CLUB' | translate }}"
               labelPlacement="stacked"
               type="text"              
@@ -206,11 +180,14 @@
               label="{{ 'ATHLETES.GENDER' | translate }}"
               labelPlacement="stacked"
               placeholder="{{ 'ATHLETES.GENDER' | translate }}"
-              [(ngModel)]="selectedGender"
+              [(ngModel)]="gender"
             >
-              <ion-select-option value="Male">{{ 'ATHLETES.GENDER_SELECTION.MALE' | translate }}</ion-select-option>
-              <ion-select-option value="Female">{{ 'ATHLETES.GENDER_SELECTION.FEMALE' | translate }}</ion-select-option>
-              <ion-select-option value="Other">{{ 'ATHLETES.GENDER_SELECTION.OTHER' | translate }}</ion-select-option>
+              <ion-select-option
+              *ngFor="let gender of genders"
+              [value]="gender.id"
+            >
+              {{ gender.name }}
+            </ion-select-option>
             </ion-select>
           </ion-item>
         </ion-content>

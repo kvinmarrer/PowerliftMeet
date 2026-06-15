@@ -13,31 +13,28 @@ export interface Athlete {
     name: string;
     description: string;
   };
-  weightClassId: string;
-  weightClassDto: {
+  genderId: string;
+  genderDto: {
     id: string;
-    weight: number;
+    name: string;
   };
   dateOfBirth: string;
-  gender: string;
 }
 
 export interface CreateAthleteRequest {
   firstName: string;
   lastName: string;
   clubId: string;
-  weightClassId: string;
+  genderId: string;
   dateOfBirth: string;
-  gender: string;
 }
 
 export interface EditAthleteRequest {
   firstName: string;
   lastName: string;
   clubId: string;
-  weightClassId: string;
+  genderId: string;
   dateOfBirth: string;
-  gender: string;
 }
 
 @Injectable({ providedIn: 'root' })

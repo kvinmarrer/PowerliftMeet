@@ -2,10 +2,11 @@ namespace PowerliftMeet.Database.Entities;
 
 using System.ComponentModel.DataAnnotations;
 
-public class Club
+public class Flight
 {
     [Key]
     public Guid Id { get; set; } = Guid.NewGuid();
-    public string Name { get; set; } = null!;
-    public string Description { get; set; } = null!;
+    public Guid MeetId { get; set; }
+    public Meet Meet { get; set; } = null!;
+    public int FlightNumber { get; set; }
 }

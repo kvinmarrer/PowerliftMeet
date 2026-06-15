@@ -26,7 +26,7 @@ public class MeetControllerTests
         // Arrange
         var meets = new List<MeetDto>
         {
-            new MeetDto { Id = 1, Name = "Test Meet", Location = "Zurich", Date = DateTime.Now }
+            new MeetDto { Id = Guid.NewGuid(), Name = "Test Meet", Location = "Zurich", Date = DateTime.Now }
         };
         _meetLogicMock.Setup(x => x.GetMeetsAsync()).ReturnsAsync(meets);
 

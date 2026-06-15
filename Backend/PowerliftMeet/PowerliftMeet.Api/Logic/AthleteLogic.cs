@@ -18,8 +18,8 @@ public class AthleteLogic : IAthleteLogic
     public async Task<IEnumerable<AthleteDto>> GetAthletesAsync()
     {
         var athletes = await _dbContext.Athletes
-            .Include(a => a.WeightClass)
             .Include(a => a.Club)
+            .Include(a => a.Gender)
             .ToListAsync();
         return athletes.Select(e => e.ToDto());
     }
@@ -30,17 +30,16 @@ public class AthleteLogic : IAthleteLogic
         {
             FirstName = request.FirstName,
             LastName = request.LastName,
-            WeightClassId = request.WeightClassId,
             ClubId = request.ClubId,
             DateOfBirth = DateOnly.FromDateTime(request.DateOfBirth),
-            Gender = request.Gender
+            GenderId = request.GenderId
         };
         _dbContext.Athletes.Add(athlete);
         await _dbContext.SaveChangesAsync();
 
         var createdAthlete = await _dbContext.Athletes
-            .Include(a => a.WeightClass)
             .Include(a => a.Club)
+            .Include(a => a.Gender)
             .FirstAsync(a => a.Id == athlete.Id);
 
         return createdAthlete.ToDto();
@@ -50,9 +49,9 @@ public class AthleteLogic : IAthleteLogic
     {
         
         var athlete = await _dbContext.Athletes
-            .Include(a => a.WeightClass)
             .Include(a => a.Club)
-            .FirstOrDefaultAsync(a => a.Id == id);
+            .Include(a => a.Gender)
+                .FirstOrDefaultAsync(a => a.Id == id);
 
         if (athlete == null)
         {
@@ -62,14 +61,13 @@ public class AthleteLogic : IAthleteLogic
         athlete.FirstName = request.FirstName;
         athlete.LastName = request.LastName;
         athlete.DateOfBirth = DateOnly.FromDateTime(request.DateOfBirth);
-        athlete.Gender = request.Gender;
+        athlete.GenderId = request.GenderId;
         athlete.ClubId = request.ClubId;
-        athlete.WeightClassId = request.WeightClassId;
 
         await _dbContext.SaveChangesAsync();
 
         return await _dbContext.Athletes
-            .Include(a => a.WeightClass)
+            .Include(a => a.Gender)
             .Include(a => a.Club)
             .Where(a => a.Id == id)
             .Select(a => a.ToDto())
