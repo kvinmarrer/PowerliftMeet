@@ -16,8 +16,6 @@ public class WeightClassLogic : IWeightClassLogic
 
     public async Task<IEnumerable<WeightClassDto>> GetWeightClassesAsync()
     {
-        var weightClasses = await _dbContext.WeightClasses
-            .ToListAsync();
-        return weightClasses.Select(w => w.ToDto());
+        return _dbContext.WeightClasses.Select(w => w.ToDto());
     }
 }

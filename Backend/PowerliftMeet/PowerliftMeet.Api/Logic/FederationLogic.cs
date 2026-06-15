@@ -16,8 +16,6 @@ public class FederationLogic : IFederationLogic
 
     public async Task<IEnumerable<FederationDto>> GetFederationsAsync()
     {
-        var federations = await _dbContext.Federations
-            .ToListAsync();
-        return federations.Select(f => f.ToDto());
+        return _dbContext.Federations.Select(f => f.ToDto());
     }
 }

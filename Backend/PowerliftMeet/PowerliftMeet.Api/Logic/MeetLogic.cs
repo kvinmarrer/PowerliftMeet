@@ -17,9 +17,7 @@ public class MeetLogic : IMeetLogic
 
     public async Task<IEnumerable<MeetDto>> GetMeetsAsync()
     {
-        var meets = await _dbContext.Meets
-            .ToListAsync();
-        return meets.Select(m => m.ToDto());
+        return _dbContext.Meets.Select(m => m.ToDto());
     }
 
     public async Task<MeetDto> CreateMeetAsync(CreateMeetDto request)

@@ -13,18 +13,9 @@ public static class MappingExtensions
             FirstName = athlete.FirstName,
             LastName = athlete.LastName,
             WeightClassId = athlete.WeightClassId,
-            WeightClassDto = new WeightClassDto
-            {
-                Id = athlete.WeightClass.Id,
-                Weight = athlete.WeightClass.Weight
-            },
+            WeightClassDto = athlete.WeightClass.ToDto(),
             FederationId = athlete.FederationId,
-            FederationDto = new FederationDto
-            {
-                Id = athlete.Federation.Id,
-                Name = athlete.Federation.Name,
-                Description = athlete.Federation.Description
-            },
+            FederationDto = athlete.Federation.ToDto(),
             DateOfBirth = athlete.DateOfBirth.ToDateTime(TimeOnly.MinValue),
             Gender = athlete.Gender
         };

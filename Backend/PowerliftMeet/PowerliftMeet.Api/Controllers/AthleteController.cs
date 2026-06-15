@@ -48,4 +48,19 @@ public class AthleteController : ControllerBase
         }
     }   
 
+    [HttpPut("{id}")]
+    public async Task<ActionResult<EditAthleteDto>> EditAthlete(Guid id, EditAthleteDto request)
+    {
+        try
+        {
+            var athlete = await _athleteLogic.EditAthleteAsync(id, request);
+            return Ok(athlete);
+        }
+        catch(Exception ex)
+        {
+            _logger.LogError(ex, "Error updating athlete with ID: {Id}", id);
+            return StatusCode(500, "Internal server error");            
+        }
+    }
+
 }

@@ -31,6 +31,15 @@ export interface CreateAthleteRequest {
   gender: string;
 }
 
+export interface EditAthleteRequest {
+  firstName: string;
+  lastName: string;
+  federationId: string;
+  weightClassId: string;
+  dateOfBirth: string;
+  gender: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AthleteService {
     
@@ -44,6 +53,10 @@ export class AthleteService {
 
   addAthlete(request: CreateAthleteRequest): Observable<Athlete> {
     return this.http.post<Athlete>(this.apiUrl, request);
+  }
+
+  updateAthlete(id: string, request: EditAthleteRequest): Observable<Athlete> {
+    return this.http.put<Athlete>(`${this.apiUrl}/${id}`, request);
   }
 
 }

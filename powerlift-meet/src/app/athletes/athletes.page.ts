@@ -114,8 +114,8 @@ export class AthletesPage implements OnInit {
   editFirstName = '';
   editLastName = '';
   editDateOfBirth = '';
-  editWeightClass: number | null = null;
-  editFederation: number | null = null;
+  editWeightClass = '';
+  editFederation = '';
   editGender = '';
 
   openEditModal(athlete: any) {
@@ -133,8 +133,8 @@ export class AthletesPage implements OnInit {
   }
 
   confirmEdit() {
-    /* Call your update service here
-    this.athleteService.update(this.selectedAthlete.id, {
+    //Call your update service here
+    this.athleteService.updateAthlete(this.selectedAthlete.id, {
       firstName: this.editFirstName,
       lastName: this.editLastName,
       dateOfBirth: this.editDateOfBirth,
@@ -144,7 +144,7 @@ export class AthletesPage implements OnInit {
     }).subscribe(() => {
       this.editModal.dismiss();
       this.loadAthletes();
-    });*/
+    });
   }
 
   onEditDismiss(event: any) {

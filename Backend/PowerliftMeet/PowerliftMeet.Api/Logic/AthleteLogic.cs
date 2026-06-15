@@ -41,8 +41,38 @@ public class AthleteLogic : IAthleteLogic
         var createdAthlete = await _dbContext.Athletes
             .Include(a => a.WeightClass)
             .Include(a => a.Federation)
-            .FirstOrDefaultAsync(a => a.Id == athlete.Id);
+            .FirstAsync(a => a.Id == athlete.Id);
 
-        return createdAthlete?.ToDto() ?? athlete.ToDto();
+        return createdAthlete.ToDto();
+    }
+
+    public async Task<AthleteDto> EditAthleteAsync(Guid id, EditAthleteDto request)
+    {
+        
+        var athlete = await _dbContext.Athletes
+            .Include(a => a.WeightClass)
+            .Include(a => a.Federation)
+            .FirstOrDefaultAsync(a => a.Id == id);
+
+        if (athlete == null)
+        {
+            throw new ArgumentException($"Athlete with ID {id} not found");
+        }
+
+        athlete.FirstName = request.FirstName;
+        athlete.LastName = request.LastName;
+        athlete.DateOfBirth = DateOnly.FromDateTime(request.DateOfBirth);
+        athlete.Gender = request.Gender;
+        athlete.FederationId = request.FederationId;
+        athlete.WeightClassId = request.WeightClassId;
+
+        await _dbContext.SaveChangesAsync();
+
+        return await _dbContext.Athletes
+            .Include(a => a.WeightClass)
+            .Include(a => a.Federation)
+            .Where(a => a.Id == id)
+            .Select(a => a.ToDto())
+            .FirstAsync();
     }
 }
