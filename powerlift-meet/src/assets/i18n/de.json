@@ -16,7 +16,8 @@
     "FILTER": {
       "ALL": "Alle",
       "MEN": "Herren",
-      "WOMEN": "Damen"
+      "WOMEN": "Damen",
+      "OTHER": "Divers"
     },
     "ADD_ATHLETE": "Athlet hinzufügen",
     "EDIT_ATHLETE": "Athlet bearbeiten",

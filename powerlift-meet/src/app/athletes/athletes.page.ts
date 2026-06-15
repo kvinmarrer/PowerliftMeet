@@ -14,6 +14,7 @@ import { IonModal } from '@ionic/angular';
 export class AthletesPage implements OnInit {
 
   athletes: Athlete[] = [];
+  filteredAthletes: Athlete[] = [];
   weightClasses: WeightClass[] = [];
   federations: Federation[] = [];
 
@@ -24,7 +25,10 @@ export class AthletesPage implements OnInit {
 
   loadAthletes() {
     this.athleteService.getAthletes().subscribe({
-      next: (data) => this.athletes = data,
+      next: (data) => {
+        this.athletes = data;
+        this.filterAthletes(); 
+      },
       error: (err) => console.error('Error fetching athletes', err)
     });
   }
@@ -62,6 +66,18 @@ export class AthletesPage implements OnInit {
   }
 
   filterAthletes() {
+    const searchTerm = this.search.toLowerCase();
+    this.filteredAthletes = this.athletes.filter(athlete => {
+      const matchesSearch = 
+        athlete.firstName.toLowerCase().includes(searchTerm) || 
+        athlete.lastName.toLowerCase().includes(searchTerm);
+      const matchesFilter = 
+        this.filter === 'all' ||
+        (this.filter === 'men' && athlete.gender === 'Male') ||
+        (this.filter === 'women' && athlete.gender === 'Female') ||
+        (this.filter === 'other' && athlete.gender === 'Other');
+      return matchesSearch && matchesFilter;
+    });
   }
 
   getStatusColor(name: string) {

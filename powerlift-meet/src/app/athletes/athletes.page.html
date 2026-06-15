@@ -28,12 +28,16 @@
       <ion-label>{{ 'ATHLETES.FILTER.WOMEN'|translate }}</ion-label>
     </ion-segment-button>
 
+    <ion-segment-button value="other" class="filter_button--other">
+      <ion-label>{{ 'ATHLETES.FILTER.OTHER'|translate }}</ion-label>
+    </ion-segment-button>
+
   </ion-segment>
 
   <!-- LIST -->
   <ion-list>
 
-    <ion-item *ngFor="let athlete of athletes" class="athlete-item" (click)="openEditModal(athlete)">
+    <ion-item *ngFor="let athlete of filteredAthletes" class="athlete-item" (click)="openEditModal(athlete)">
 
       <!-- AVATAR -->
       <ion-avatar slot="start">
@@ -50,7 +54,8 @@
         </p>
       </ion-label>
 
-      <ion-button slot="end" fill="clear" (click)="deleteAthlete(athlete.id)" (click)="$event.stopPropagation()">
+      <ion-button slot="end" fill="clear" 
+        (click)="$event.stopPropagation(); deleteAthlete(athlete.id)">
         <ion-icon name="trash-outline" color="danger"></ion-icon>
       </ion-button>
 

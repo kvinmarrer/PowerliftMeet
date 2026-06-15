@@ -16,7 +16,8 @@
     "FILTER": {
       "ALL": "All",
       "MEN": "Men",
-      "WOMEN": "Women"
+      "WOMEN": "Women",
+      "OTHER": "Other"
     },
     "ADD_ATHLETE": "Add Athlete",
     "EDIT_ATHLETE": "Edit Athlete",
