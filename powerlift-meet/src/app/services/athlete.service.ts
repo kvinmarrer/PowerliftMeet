@@ -59,4 +59,8 @@ export class AthleteService {
     return this.http.put<Athlete>(`${this.apiUrl}/${id}`, request);
   }
 
+  deleteAthlete(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
 }

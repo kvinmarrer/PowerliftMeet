@@ -17,6 +17,22 @@
       "ALL": "All",
       "MEN": "Men",
       "WOMEN": "Women"
+    },
+    "ADD_ATHLETE": "Add Athlete",
+    "EDIT_ATHLETE": "Edit Athlete",
+    "FIRST_NAME": "First Name",
+    "LAST_NAME": "Last Name",
+    "DATE_OF_BIRTH": "Date of Birth",
+    "WEIGHT_CLASS": "Weight Class",
+    "FEDERATION": "Federation",
+    "GENDER": "Gender",
+    "CANCEL": "Cancel",
+    "SAVE": "Save",
+    "CONFIRM": "Confirm",
+    "GENDER_SELECTION": {
+      "MALE": "Male",
+      "FEMALE": "Female",
+      "OTHER": "Other"
     }
   },
   "WEIGH_IN": {

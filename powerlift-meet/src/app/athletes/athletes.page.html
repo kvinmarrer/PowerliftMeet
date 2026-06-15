@@ -50,6 +50,10 @@
         </p>
       </ion-label>
 
+      <ion-button slot="end" fill="clear" (click)="deleteAthlete(athlete.id)" (click)="$event.stopPropagation()">
+        <ion-icon name="trash-outline" color="danger"></ion-icon>
+      </ion-button>
+
       <ion-badge
         slot="end"
         [color]="getStatusColor(athlete.firstName + ' ' + athlete.lastName)">
@@ -65,29 +69,29 @@
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button (click)="editModal.dismiss()">Cancel</ion-button>
+            <ion-button (click)="editModal.dismiss()">{{ 'ATHLETES.CANCEL' | translate }}</ion-button>
           </ion-buttons>
-          <ion-title>Edit Athlete</ion-title>
+          <ion-title>{{ 'ATHLETES.EDIT_ATHLETE' | translate }}</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="confirmEdit()" [strong]="true">Save</ion-button>
+            <ion-button (click)="confirmEdit()" [strong]="true">{{ 'ATHLETES.SAVE' | translate }}</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
         <ion-item>
-          <ion-input label="First Name" labelPlacement="stacked"
+          <ion-input label="{{ 'ATHLETES.FIRST_NAME' | translate }}" labelPlacement="stacked"
             [(ngModel)]="editFirstName"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input label="Last Name" labelPlacement="stacked"
+          <ion-input label="{{ 'ATHLETES.LAST_NAME' | translate }}" labelPlacement="stacked"
             [(ngModel)]="editLastName"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input label="Date of Birth" labelPlacement="stacked" type="date"
+          <ion-input label="{{ 'ATHLETES.DATE_OF_BIRTH' | translate }}" labelPlacement="stacked" type="date"
             [(ngModel)]="editDateOfBirth"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-select label="Weight Class" labelPlacement="stacked"
+          <ion-select label="{{ 'ATHLETES.WEIGHT_CLASS' | translate }}" labelPlacement="stacked"
             [(ngModel)]="editWeightClass">
             <ion-select-option *ngFor="let wc of weightClasses" [value]="wc.id">
               {{ wc.weight }} kg
@@ -95,7 +99,7 @@
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-select label="Federation" labelPlacement="stacked"
+          <ion-select label="{{ 'ATHLETES.FEDERATION' | translate }}" labelPlacement="stacked"
             [(ngModel)]="editFederation">
             <ion-select-option *ngFor="let fed of federations" [value]="fed.id">
               {{ fed.name }}
@@ -103,11 +107,11 @@
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-select label="Gender" labelPlacement="stacked"
+          <ion-select label="{{ 'ATHLETES.GENDER' | translate }}" labelPlacement="stacked"
             [(ngModel)]="editGender">
-            <ion-select-option value="Male">Male</ion-select-option>
-            <ion-select-option value="Female">Female</ion-select-option>
-            <ion-select-option value="Other">Other</ion-select-option>
+            <ion-select-option value="Male">{{ 'ATHLETES.GENDER_SELECTION.MALE' | translate }}</ion-select-option>
+            <ion-select-option value="Female">{{ 'ATHLETES.GENDER_SELECTION.FEMALE' | translate }}</ion-select-option>
+            <ion-select-option value="Other">{{ 'ATHLETES.GENDER_SELECTION.OTHER' | translate }}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-content>
@@ -115,54 +119,54 @@
   </ion-modal>
 
   <ion-content class="ion-padding">
-    <ion-button id="open-modal" expand="block" class="athlete-modal-button">Add Athlete</ion-button>
+    <ion-button id="open-modal" expand="block" class="athlete-modal-button">{{ 'ATHLETES.ADD_ATHLETE' | translate }}</ion-button>
     <ion-modal trigger="open-modal" class="athlete-modal" (willDismiss)="onWillDismiss($event)" #addModal>
       <ng-template>
         <ion-header>
           <ion-toolbar>
             <ion-buttons slot="start">
-              <ion-button (click)="cancel()">Cancel</ion-button>
+              <ion-button (click)="cancel()">{{ 'ATHLETES.CANCEL' | translate }}</ion-button>
             </ion-buttons>
-            <ion-title>Add Athlete</ion-title>
+            <ion-title>{{ 'ATHLETES.ADD_ATHLETE' | translate }}</ion-title>
             <ion-buttons slot="end">
-              <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+              <ion-button (click)="confirm()" [strong]="true">{{ 'ATHLETES.CONFIRM' | translate }}</ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
           <ion-item>
             <ion-input
-              label="Enter First Name"
+              label="{{ 'ATHLETES.FIRST_NAME' | translate }}"
               labelPlacement="stacked"
               type="text"
-              placeholder="Your first name"
+              placeholder="{{ 'ATHLETES.FIRST_NAME' | translate }}"
               [(ngModel)]="firstName"
             ></ion-input>
           </ion-item>
           <ion-item>
             <ion-input
-              label="Enter Last Name"
+              label="{{ 'ATHLETES.LAST_NAME' | translate }}"
               labelPlacement="stacked"
               type="text"
-              placeholder="Your last name"
+              placeholder="{{ 'ATHLETES.LAST_NAME' | translate }}"
               [(ngModel)]="lastName"
             ></ion-input>
           </ion-item>
           <ion-item>
             <ion-input
-              label="Enter Date of Birth"
+              label="{{ 'ATHLETES.DATE_OF_BIRTH' | translate }}"
               labelPlacement="stacked"
               type="date"              
-              placeholder="Your date of birth"
+              placeholder="{{ 'ATHLETES.DATE_OF_BIRTH' | translate }}"
               [(ngModel)]="dateOfBirth"
             ></ion-input>
           </ion-item>
           <ion-item>
             <ion-select
-              label="Enter Weight Class"
+              label="{{ 'ATHLETES.WEIGHT_CLASS' | translate }}"
               labelPlacement="stacked"
               type="text"              
-              placeholder="Your weight class"
+              placeholder="{{ 'ATHLETES.WEIGHT_CLASS' | translate }}"
               [(ngModel)]="weightClass"
             >
 
@@ -177,10 +181,10 @@
           </ion-item>
           <ion-item>
             <ion-select
-              label="Enter Federation"
+              label="{{ 'ATHLETES.FEDERATION' | translate }}"
               labelPlacement="stacked"
               type="text"              
-              placeholder="Your federation"
+              placeholder="{{ 'ATHLETES.FEDERATION' | translate }}"
               [(ngModel)]="federation"
             >
             <ion-select-option
@@ -194,14 +198,14 @@
           </ion-item>
           <ion-item>
             <ion-select
-              label="Select Gender"
+              label="{{ 'ATHLETES.GENDER' | translate }}"
               labelPlacement="stacked"
-              placeholder="Select Gender"
+              placeholder="{{ 'ATHLETES.GENDER' | translate }}"
               [(ngModel)]="selectedGender"
             >
-              <ion-select-option value="Male">Male</ion-select-option>
-              <ion-select-option value="Female">Female</ion-select-option>
-              <ion-select-option value="Other">Other</ion-select-option>
+              <ion-select-option value="Male">{{ 'ATHLETES.GENDER_SELECTION.MALE' | translate }}</ion-select-option>
+              <ion-select-option value="Female">{{ 'ATHLETES.GENDER_SELECTION.FEMALE' | translate }}</ion-select-option>
+              <ion-select-option value="Other">{{ 'ATHLETES.GENDER_SELECTION.OTHER' | translate }}</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-content>

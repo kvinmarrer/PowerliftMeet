@@ -63,4 +63,18 @@ public class AthleteController : ControllerBase
         }
     }
 
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteAthlete(Guid id)
+    {
+        try
+        {
+            await _athleteLogic.DeleteAthleteAsync(id);
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error deleting athlete with ID: {Id}", id);
+            return StatusCode(500, "Internal server error");
+        }
+    }
 }

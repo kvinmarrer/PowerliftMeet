@@ -124,7 +124,7 @@ export class AthletesPage implements OnInit {
     // Pre-populate fields
     this.editFirstName = athlete.firstName;
     this.editLastName = athlete.lastName;
-    this.editDateOfBirth = athlete.dateOfBirth;
+    this.editDateOfBirth = new Date(athlete.dateOfBirth).toISOString().split('T')[0]; 
     this.editWeightClass = athlete.weightClassDto.id;
     this.editFederation = athlete.federationDto.id;
     this.editGender = athlete.gender;
@@ -151,4 +151,14 @@ export class AthletesPage implements OnInit {
     this.selectedAthlete = null;
   }
 
+  // Delete athlete
+  deleteAthlete(athleteId: string) {
+    this.athleteService.deleteAthlete(athleteId).subscribe({
+      next: () => {
+        this.loadAthletes();
+      },
+      error: (err) => console.error('Error deleting athlete', err)
+    });
+  }
+  
 }

@@ -7,4 +7,5 @@ public interface IAthleteLogic
     Task<IEnumerable<AthleteDto>> GetAthletesAsync();
     Task<AthleteDto> AddAthleteAsync(CreateAthleteDto request);
     Task<AthleteDto> EditAthleteAsync(Guid id, EditAthleteDto request);
+    Task DeleteAthleteAsync(Guid id);
 }

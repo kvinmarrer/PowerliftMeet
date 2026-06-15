@@ -17,6 +17,22 @@
       "ALL": "Alle",
       "MEN": "Herren",
       "WOMEN": "Damen"
+    },
+    "ADD_ATHLETE": "Athlet hinzufügen",
+    "EDIT_ATHLETE": "Athlet bearbeiten",
+    "FIRST_NAME": "Vorname",
+    "LAST_NAME": "Nachname",
+    "DATE_OF_BIRTH": "Geburtsdatum",
+    "WEIGHT_CLASS": "Gewichtsklasse",
+    "FEDERATION": "Verband",
+    "GENDER": "Geschlecht",
+    "CANCEL": "Abbrechen",
+    "SAVE": "Speichern",
+    "CONFIRM": "Bestätigen",
+    "GENDER_SELECTION": {
+      "MALE": "Männlich",
+      "FEMALE": "Weiblich",
+      "OTHER": "Divers"
     }
   },
   "WEIGH_IN": {

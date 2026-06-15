@@ -75,4 +75,17 @@ public class AthleteLogic : IAthleteLogic
             .Select(a => a.ToDto())
             .FirstAsync();
     }
+
+    public async Task DeleteAthleteAsync(Guid id)
+    {
+        var athlete = await _dbContext.Athletes.FindAsync(id);
+
+        if (athlete == null)
+        {
+            throw new ArgumentException($"Athlete with ID {id} not found");
+        }
+
+        _dbContext.Athletes.Remove(athlete);
+        await _dbContext.SaveChangesAsync();
+    }
 }
