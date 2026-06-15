@@ -11,6 +11,6 @@ public class AppDbContext : DbContext
 
     public DbSet<Meet> Meets { get; set; } = null!;
     public DbSet<Athlete> Athletes { get; set; } = null!;
-    public DbSet<Federation> Federations { get; set; } = null!;
+    public DbSet<Club> Clubs { get; set; } = null!;
     public DbSet<WeightClass> WeightClasses { get; set; } = null!;
 }

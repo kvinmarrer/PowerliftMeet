@@ -62,7 +62,7 @@
       <ion-badge
         slot="end"
         [color]="getStatusColor(athlete.firstName + ' ' + athlete.lastName)">
-        {{ athlete.federationDto.name }}
+        {{ athlete.clubDto.name }}
       </ion-badge>
 
     </ion-item>
@@ -104,10 +104,10 @@
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-select label="{{ 'ATHLETES.FEDERATION' | translate }}" labelPlacement="stacked"
-            [(ngModel)]="editFederation">
-            <ion-select-option *ngFor="let fed of federations" [value]="fed.id">
-              {{ fed.name }}
+          <ion-select label="{{ 'ATHLETES.CLUB' | translate }}" labelPlacement="stacked"
+            [(ngModel)]="editClub">
+            <ion-select-option *ngFor="let club of clubs" [value]="club.id">
+              {{ club.name }}
             </ion-select-option>
           </ion-select>
         </ion-item>
@@ -186,17 +186,17 @@
           </ion-item>
           <ion-item>
             <ion-select
-              label="{{ 'ATHLETES.FEDERATION' | translate }}"
+              label="{{ 'ATHLETES.CLUB' | translate }}"
               labelPlacement="stacked"
               type="text"              
-              placeholder="{{ 'ATHLETES.FEDERATION' | translate }}"
-              [(ngModel)]="federation"
+              placeholder="{{ 'ATHLETES.CLUB' | translate }}"
+              [(ngModel)]="club"
             >
             <ion-select-option
-              *ngFor="let fed of federations"
-              [value]="fed.id"
+              *ngFor="let club of clubs"
+              [value]="club.id"
             >
-              {{ fed.name }}
+              {{ club.name }}
             </ion-select-option>
 
             </ion-select>

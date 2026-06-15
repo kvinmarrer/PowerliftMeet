@@ -19,7 +19,7 @@ public class AthleteLogic : IAthleteLogic
     {
         var athletes = await _dbContext.Athletes
             .Include(a => a.WeightClass)
-            .Include(a => a.Federation)
+            .Include(a => a.Club)
             .ToListAsync();
         return athletes.Select(e => e.ToDto());
     }
@@ -31,7 +31,7 @@ public class AthleteLogic : IAthleteLogic
             FirstName = request.FirstName,
             LastName = request.LastName,
             WeightClassId = request.WeightClassId,
-            FederationId = request.FederationId,
+            ClubId = request.ClubId,
             DateOfBirth = DateOnly.FromDateTime(request.DateOfBirth),
             Gender = request.Gender
         };
@@ -40,7 +40,7 @@ public class AthleteLogic : IAthleteLogic
 
         var createdAthlete = await _dbContext.Athletes
             .Include(a => a.WeightClass)
-            .Include(a => a.Federation)
+            .Include(a => a.Club)
             .FirstAsync(a => a.Id == athlete.Id);
 
         return createdAthlete.ToDto();
@@ -51,7 +51,7 @@ public class AthleteLogic : IAthleteLogic
         
         var athlete = await _dbContext.Athletes
             .Include(a => a.WeightClass)
-            .Include(a => a.Federation)
+            .Include(a => a.Club)
             .FirstOrDefaultAsync(a => a.Id == id);
 
         if (athlete == null)
@@ -63,14 +63,14 @@ public class AthleteLogic : IAthleteLogic
         athlete.LastName = request.LastName;
         athlete.DateOfBirth = DateOnly.FromDateTime(request.DateOfBirth);
         athlete.Gender = request.Gender;
-        athlete.FederationId = request.FederationId;
+        athlete.ClubId = request.ClubId;
         athlete.WeightClassId = request.WeightClassId;
 
         await _dbContext.SaveChangesAsync();
 
         return await _dbContext.Athletes
             .Include(a => a.WeightClass)
-            .Include(a => a.Federation)
+            .Include(a => a.Club)
             .Where(a => a.Id == id)
             .Select(a => a.ToDto())
             .FirstAsync();

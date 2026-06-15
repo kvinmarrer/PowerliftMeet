@@ -1,6 +1,6 @@
 namespace PowerliftMeet.Api.DTOs;
 
-public class FederationDto
+public class ClubDto
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = null!;

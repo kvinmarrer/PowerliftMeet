@@ -6,9 +6,9 @@ public class Athlete
 {
     [Key]
     public Guid Id { get; set; } = Guid.NewGuid();
-    [ForeignKey("Federation")]
-    public Guid FederationId { get; set; }
-    public Federation Federation { get; set; } = null!;
+    [ForeignKey("Club")]
+    public Guid ClubId { get; set; }
+    public Club Club { get; set; } = null!;
     [ForeignKey("WeightClass")]
     public Guid WeightClassId { get; set; }
     public WeightClass WeightClass { get; set; } = null!;

@@ -14,8 +14,8 @@ public static class MappingExtensions
             LastName = athlete.LastName,
             WeightClassId = athlete.WeightClassId,
             WeightClassDto = athlete.WeightClass.ToDto(),
-            FederationId = athlete.FederationId,
-            FederationDto = athlete.Federation.ToDto(),
+            ClubId = athlete.ClubId,
+            ClubDto = athlete.Club.ToDto(),
             DateOfBirth = athlete.DateOfBirth.ToDateTime(TimeOnly.MinValue),
             Gender = athlete.Gender
         };
@@ -53,13 +53,14 @@ public static class MappingExtensions
         };
     }
 
-    public static FederationDto ToDto(this Federation federation)
+    public static ClubDto ToDto(this Club club)
     {
-        return new FederationDto
+        return new ClubDto
         {
-            Id = federation.Id,
-            Name = federation.Name,
-            Description = federation.Description
+            Id = club.Id,
+            Name = club.Name,
+            Description = club.Description
         };
     }
+
 }

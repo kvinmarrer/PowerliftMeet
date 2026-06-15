@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Athlete, AthleteService } from '../services/athlete.service';
-import { Federation, FederationService } from '../services/federation.service';
+import { Club, ClubService } from '../services/club.service';
 import { WeightClass, WeightClassService } from '../services/weightclass.service';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { IonModal } from '@ionic/angular';
@@ -16,12 +16,12 @@ export class AthletesPage implements OnInit {
   athletes: Athlete[] = [];
   filteredAthletes: Athlete[] = [];
   weightClasses: WeightClass[] = [];
-  federations: Federation[] = [];
+  clubs: Club[] = [];
 
   search: string = '';
   filter: string = 'all';
 
-  constructor(private athleteService: AthleteService, private weightClassService: WeightClassService, private federationService: FederationService) { }
+  constructor(private athleteService: AthleteService, private weightClassService: WeightClassService, private clubService: ClubService) { }
 
   loadAthletes() {
     this.athleteService.getAthletes().subscribe({
@@ -39,9 +39,9 @@ export class AthletesPage implements OnInit {
       next: (data) => this.weightClasses = data,
       error: (err) => console.error('Error fetching weight classes', err)
     });
-    this.federationService.getFederations().subscribe({
-      next: (data) => this.federations = data,
-      error: (err) => console.error('Error fetching federations', err)
+    this.clubService.getClubs().subscribe({
+      next: (data) => this.clubs = data,
+      error: (err) => console.error('Error fetching clubs', err)
     });
   }
 
@@ -90,7 +90,7 @@ export class AthletesPage implements OnInit {
   lastName!: string;
   dateOfBirth!: string;
   weightClass!: string;
-  federation!: string;
+  club!: string;
   selectedGender!: string;
 
   cancel() {
@@ -103,7 +103,7 @@ export class AthletesPage implements OnInit {
       lastName: this.lastName,
       dateOfBirth: this.dateOfBirth,
       weightClassId: this.weightClass,
-      federationId: this.federation,
+      clubId: this.club,
       gender: this.selectedGender
     };
     this.modal.dismiss(athlete, 'confirm');
@@ -131,7 +131,7 @@ export class AthletesPage implements OnInit {
   editLastName = '';
   editDateOfBirth = '';
   editWeightClass = '';
-  editFederation = '';
+  editClub = '';
   editGender = '';
 
   openEditModal(athlete: any) {
@@ -142,7 +142,7 @@ export class AthletesPage implements OnInit {
     this.editLastName = athlete.lastName;
     this.editDateOfBirth = new Date(athlete.dateOfBirth).toISOString().split('T')[0]; 
     this.editWeightClass = athlete.weightClassDto.id;
-    this.editFederation = athlete.federationDto.id;
+    this.editClub = athlete.clubDto.id;
     this.editGender = athlete.gender;
 
     this.editModal.present();
@@ -155,7 +155,7 @@ export class AthletesPage implements OnInit {
       lastName: this.editLastName,
       dateOfBirth: this.editDateOfBirth,
       weightClassId: this.editWeightClass,
-      federationId: this.editFederation,
+      clubId: this.editClub,
       gender: this.editGender,
     }).subscribe(() => {
       this.editModal.dismiss();

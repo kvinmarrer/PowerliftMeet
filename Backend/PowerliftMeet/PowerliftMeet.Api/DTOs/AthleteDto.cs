@@ -7,8 +7,8 @@ public class AthleteDto
     public string LastName { get; set; } = null!;
     public Guid WeightClassId { get; set; }
     public WeightClassDto WeightClassDto { get; set; } = null!;
-    public Guid FederationId { get; set; }
-    public FederationDto FederationDto { get; set; } = null!;
+    public Guid ClubId { get; set; }
+    public ClubDto ClubDto { get; set; } = null!;
     public DateTime DateOfBirth { get; set; }
     public string Gender { get; set; } = null!;
 }

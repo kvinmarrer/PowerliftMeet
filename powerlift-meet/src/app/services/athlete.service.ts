@@ -7,8 +7,8 @@ export interface Athlete {
   id: string;
   firstName: string;
   lastName: string;
-  federationId: string;
-  federationDto: {
+  clubId: string;
+  clubDto: {
     id: string;
     name: string;
     description: string;
@@ -25,7 +25,7 @@ export interface Athlete {
 export interface CreateAthleteRequest {
   firstName: string;
   lastName: string;
-  federationId: string;
+  clubId: string;
   weightClassId: string;
   dateOfBirth: string;
   gender: string;
@@ -34,7 +34,7 @@ export interface CreateAthleteRequest {
 export interface EditAthleteRequest {
   firstName: string;
   lastName: string;
-  federationId: string;
+  clubId: string;
   weightClassId: string;
   dateOfBirth: string;
   gender: string;
