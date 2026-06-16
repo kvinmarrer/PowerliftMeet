@@ -19,7 +19,6 @@ public class AthleteLogic : IAthleteLogic
     {
         var athletes = await _dbContext.Athletes
             .Include(a => a.Club)
-            .Include(a => a.Gender)
             .ToListAsync();
         return athletes.Select(e => e.ToDto());
     }
@@ -32,14 +31,13 @@ public class AthleteLogic : IAthleteLogic
             LastName = request.LastName,
             ClubId = request.ClubId,
             DateOfBirth = request.DateOfBirth,
-            GenderId = request.GenderId
+            Gender = request.Gender
         };
         _dbContext.Athletes.Add(athlete);
         await _dbContext.SaveChangesAsync();
 
         var createdAthlete = await _dbContext.Athletes
             .Include(a => a.Club)
-            .Include(a => a.Gender)
             .FirstAsync(a => a.Id == athlete.Id);
 
         return createdAthlete.ToDto();
@@ -50,7 +48,6 @@ public class AthleteLogic : IAthleteLogic
         
         var athlete = await _dbContext.Athletes
             .Include(a => a.Club)
-            .Include(a => a.Gender)
                 .FirstOrDefaultAsync(a => a.Id == id);
 
         if (athlete == null)
@@ -61,13 +58,12 @@ public class AthleteLogic : IAthleteLogic
         athlete.FirstName = request.FirstName;
         athlete.LastName = request.LastName;
         athlete.DateOfBirth = request.DateOfBirth;
-        athlete.GenderId = request.GenderId;
+        athlete.Gender = request.Gender;
         athlete.ClubId = request.ClubId;
 
         await _dbContext.SaveChangesAsync();
 
         return await _dbContext.Athletes
-            .Include(a => a.Gender)
             .Include(a => a.Club)
             .Where(a => a.Id == id)
             .Select(a => a.ToDto())

@@ -33,6 +33,25 @@ public class MeetController : ControllerBase
         }
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<MeetByIdDto>> GetMeetById(Guid id)
+    {
+        try
+        {
+            var meet = await _meetLogic.GetMeetByIdAsync(id);
+            if (meet == null)
+            {
+                return NotFound();
+            }
+            return Ok(meet);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving meet");
+            return StatusCode(500, "An error occurred while retrieving the meet.");
+        }
+    }
+
     [HttpPost]
     public async Task<ActionResult<CreateMeetDto>> CreateMeet(CreateMeetDto meet)
     {

@@ -12,8 +12,7 @@ public static class MappingExtensions
             Id = athlete.Id,
             FirstName = athlete.FirstName,
             LastName = athlete.LastName,
-            GenderId = athlete.GenderId,
-            GenderDto = athlete.Gender.ToDto(),
+            Gender = athlete.Gender,
             ClubId = athlete.ClubId,
             ClubDto = athlete.Club.ToDto(),
             DateOfBirth = athlete.DateOfBirth,
@@ -32,6 +31,49 @@ public static class MappingExtensions
         };
     }
 
+    public static MeetByIdDto ToMeetByIdDto(this Meet meet)
+    {
+        return new MeetByIdDto
+        {
+            Id = meet.Id,
+            Name = meet.Name,
+            Date = meet.Date,
+            Location = meet.Location,
+            Description = meet.Description,
+            Status = meet.Status,
+            MeetAthletes = meet.MeetAthletes?.Select(ma => ma.ToDto()) ?? new List<MeetAthleteDto>(),
+            Flights = meet.Flights?.Select(f => f.ToDto()) ?? new List<FlightDto>()
+        };
+    }
+
+    public static MeetAthleteDto ToDto(this MeetAthlete meetAthlete)
+    {
+        return new MeetAthleteDto
+        {
+            Id = meetAthlete.Id,
+            MeetId = meetAthlete.MeetId,
+            AthleteId = meetAthlete.AthleteId,
+            Athlete = meetAthlete.Athlete.ToDto(),
+            WeightClassId = meetAthlete.WeightClassId,
+            WeightClass = meetAthlete.WeightClass.ToDto(),
+            FlightId = meetAthlete.FlightId,
+            Flight = meetAthlete.Flight?.ToDto(),
+            BodyWeight = meetAthlete.BodyWeight,
+            Lot = meetAthlete.Lot,
+            Equipment = meetAthlete.Equipment
+        };
+    }
+
+    public static FlightDto ToDto(this Flight flight)
+    {
+        return new FlightDto
+        {
+            Id = flight.Id,
+            MeetId = flight.MeetId,
+            FlightNumber = flight.FlightNumber
+        };
+    }
+
     public static Meet ToEntity(this CreateMeetDto dto)
     {
         return new Meet
@@ -40,15 +82,6 @@ public static class MappingExtensions
             Date = dto.Date,
             Location = dto.Location,
             Description = dto.Description
-        };
-    }
-
-    public static GenderDto ToDto(this Gender gender)
-    {
-        return new GenderDto
-        {
-            Id = gender.Id,
-            Name = gender.Name
         };
     }
 

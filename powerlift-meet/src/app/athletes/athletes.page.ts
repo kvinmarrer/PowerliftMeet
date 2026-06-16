@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Athlete, AthleteService } from '../services/athlete.service';
 import { Club, ClubService } from '../services/club.service';
-import { Gender, GenderService } from '../services/gender.service';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { IonModal } from '@ionic/angular';
 
@@ -15,13 +14,12 @@ export class AthletesPage implements OnInit {
 
   athletes: Athlete[] = [];
   filteredAthletes: Athlete[] = [];
-  genders: Gender[] = [];
   clubs: Club[] = [];
 
   search: string = '';
   filter: string = 'all';
 
-  constructor(private athleteService: AthleteService, private genderService: GenderService, private clubService: ClubService) { }
+  constructor(private athleteService: AthleteService, private clubService: ClubService) { }
 
   loadAthletes() {
     this.athleteService.getAthletes().subscribe({
@@ -35,10 +33,6 @@ export class AthletesPage implements OnInit {
 
   ngOnInit() {
     this.loadAthletes();
-    this.genderService.getGenders().subscribe({
-      next: (data) => this.genders = data,
-      error: (err) => console.error('Error fetching genders', err)
-    });
     this.clubService.getClubs().subscribe({
       next: (data) => this.clubs = data,
       error: (err) => console.error('Error fetching clubs', err)
@@ -73,9 +67,9 @@ export class AthletesPage implements OnInit {
         athlete.lastName.toLowerCase().includes(searchTerm);
       const matchesFilter = 
         this.filter === 'all' ||
-        (this.filter === 'men' && athlete.genderDto.name === 'Male') ||
-        (this.filter === 'women' && athlete.genderDto.name === 'Female') ||
-        (this.filter === 'other' && athlete.genderDto.name === 'Other');
+        (this.filter === 'men' && athlete.gender === 'Male') ||
+        (this.filter === 'women' && athlete.gender === 'Female') ||
+        (this.filter === 'other' && athlete.gender === 'Other');
       return matchesSearch && matchesFilter;
     });
   }
@@ -101,7 +95,7 @@ export class AthletesPage implements OnInit {
       firstName: this.firstName,
       lastName: this.lastName,
       dateOfBirth: this.dateOfBirth,
-      genderId: this.gender,
+      gender: this.gender,
       clubId: this.club,
     };
     this.modal.dismiss(athlete, 'confirm');
@@ -117,6 +111,11 @@ export class AthletesPage implements OnInit {
         error: (err) => console.error('Error adding athlete', err)
       });
     }
+    this.firstName = '';
+    this.lastName = '';
+    this.dateOfBirth = '';
+    this.gender = '';
+    this.club = '';
   }
 
   // View athlete details
@@ -138,7 +137,7 @@ export class AthletesPage implements OnInit {
     this.editFirstName = athlete.firstName;
     this.editLastName = athlete.lastName;
     this.editDateOfBirth = athlete.dateOfBirth;
-    this.editGender = athlete.genderDto.id;
+    this.editGender = athlete.gender;
     this.editClub = athlete.clubDto.id;
 
     this.editModal.present();
@@ -150,7 +149,7 @@ export class AthletesPage implements OnInit {
       firstName: this.editFirstName,
       lastName: this.editLastName,
       dateOfBirth: this.editDateOfBirth,
-      genderId: this.editGender,
+      gender: this.editGender,
       clubId: this.editClub,
     }).subscribe(() => {
       this.editModal.dismiss();

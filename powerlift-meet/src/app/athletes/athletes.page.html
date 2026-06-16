@@ -50,7 +50,7 @@
       <ion-label>
         <h2>{{ athlete.firstName }} {{ athlete.lastName }}</h2>
         <p>
-          {{ getAgeClass(athlete.dateOfBirth) }} · {{ athlete.genderDto.name }}
+          {{ getAgeClass(athlete.dateOfBirth) }} · {{ athlete.gender }}
         </p>
       </ion-label>
 
@@ -106,9 +106,9 @@
         <ion-item>
           <ion-select label="{{ 'ATHLETES.GENDER' | translate }}" labelPlacement="stacked"
             [(ngModel)]="editGender">
-            <ion-select-option *ngFor="let gender of genders" [value]="gender.id">
-              {{ gender.name }}
-            </ion-select-option>
+            <ion-select-option value="Male">{{ 'ATHLETES.GENDER_SELECTION.MALE' | translate }}</ion-select-option>
+            <ion-select-option value="Female">{{ 'ATHLETES.GENDER_SELECTION.FEMALE' | translate }}</ion-select-option>
+            <ion-select-option value="Other">{{ 'ATHLETES.GENDER_SELECTION.OTHER' | translate }}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-content>
@@ -181,12 +181,9 @@
             placeholder="{{ 'ATHLETES.GENDER' | translate }}"
             [(ngModel)]="gender"
           >
-            <ion-select-option
-            *ngFor="let gender of genders"
-            [value]="gender.id"
-          >
-            {{ gender.name }}
-          </ion-select-option>
+            <ion-select-option value="Male">{{ 'ATHLETES.GENDER_SELECTION.MALE' | translate }}</ion-select-option>
+            <ion-select-option value="Female">{{ 'ATHLETES.GENDER_SELECTION.FEMALE' | translate }}</ion-select-option>
+            <ion-select-option value="Other">{{ 'ATHLETES.GENDER_SELECTION.OTHER' | translate }}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-content>

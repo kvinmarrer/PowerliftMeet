@@ -7,6 +7,7 @@ export interface Meet {
   name: string;
   date: string;
   location: string;
+  description: string;
 }
 
 export interface CreateMeetRequest {
@@ -14,6 +15,16 @@ export interface CreateMeetRequest {
   date: string;
   location: string;
   description: string;
+}
+
+export interface MeetById extends Meet {
+  meetAthletes: MeetAthlete[];
+}
+
+export interface MeetAthlete {
+  id: string;
+  name: string;
+  weightClass: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -24,6 +35,10 @@ export class MeetService {
 
   getMeets() {
     return this.http.get<Meet[]>(this.apiUrl);
+  }
+
+  getMeetById(meetId: string) {
+    return this.http.get<MeetById>(`${this.apiUrl}/${meetId}`);
   }
 
   addMeet(request: CreateMeetRequest) {

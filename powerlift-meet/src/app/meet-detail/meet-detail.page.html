@@ -1,0 +1,48 @@
+<app-header title="{{ meet?.name }}"></app-header>
+<ion-content class="ion-padding">
+
+  <!-- Meet Info -->
+  <ion-card>
+    <ion-card-content>
+      <p><ion-icon name="calendar-outline"></ion-icon> {{ meet?.date | date:'longDate' }}</p>
+      <p><ion-icon name="location-outline"></ion-icon> {{ meet?.location }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+
+    <ion-item [routerLink]="['/tabs/meet-athletes']" detail="true">
+      <ion-icon slot="start" name="people-outline" color="primary"></ion-icon>
+      <ion-label>
+        <h2>{{ 'MEET.ATHLETES' | translate }}</h2>
+        <p>{{ athleteCount }} registriert</p>
+      </ion-label>
+      <ion-badge slot="end" color="success" *ngIf="athleteCount > 0">✓</ion-badge>
+      <ion-badge slot="end" color="warning" *ngIf="athleteCount === 0">Ausstehend</ion-badge>
+    </ion-item>
+
+  </ion-list>
+
+  <!-- Meet actions -->
+  <ion-button 
+    expand="block" 
+    color="success"
+    [disabled]="!canStart"
+    (click)="startMeet()"
+    style="margin-top: 24px;">
+    <ion-icon slot="start" name="play-outline"></ion-icon>
+    {{ 'MEET.START' | translate }}
+  </ion-button>
+
+  <ng-container >
+    <ion-button expand="block" [routerLink]="['/tabs/lift-entry']" style="margin-top: 8px;">
+      <ion-icon slot="start" name="barbell-outline"></ion-icon>
+      Lift-Eingabe
+    </ion-button>
+    <ion-button expand="block" fill="outline" [routerLink]="['/tabs/scoreboard']">
+      <ion-icon slot="start" name="stats-chart-outline"></ion-icon>
+      Scoreboard
+    </ion-button>
+  </ng-container>
+
+</ion-content>

@@ -17,7 +17,25 @@ public class MeetLogic : IMeetLogic
 
     public async Task<IEnumerable<MeetDto>> GetMeetsAsync()
     {
-        return _dbContext.Meets.Select(m => m.ToDto());
+        return await _dbContext.Meets.Select(m => m.ToDto()).ToListAsync();
+    }
+
+    public async Task<MeetByIdDto> GetMeetByIdAsync(Guid id)
+    {
+        var meet = await _dbContext.Meets
+            .Include(m => m.MeetAthletes)
+                .ThenInclude(ma => ma.Athlete)
+            .Include(m => m.MeetAthletes)
+                .ThenInclude(ma => ma.Athlete)
+                    .ThenInclude(a => a.Club)         
+            .Include(m => m.MeetAthletes)
+                .ThenInclude(ma => ma.WeightClass)
+            .Include(m => m.Flights)
+            .FirstOrDefaultAsync(m => m.Id == id);
+
+        if (meet == null) throw new KeyNotFoundException($"Meet with ID {id} not found.");
+
+        return meet.ToMeetByIdDto();
     }
 
     public async Task<MeetDto> CreateMeetAsync(CreateMeetDto request)

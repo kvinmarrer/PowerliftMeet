@@ -10,5 +10,8 @@ public class Meet
     public DateOnly Date { get; set; }
     public string Location { get; set; } = null!;
     public string? Description { get; set; }
+    public string Status { get; set; } = "Scheduled";
+    public List<MeetAthlete> MeetAthletes { get; set; } = new List<MeetAthlete>(); 
+    public List<Flight> Flights { get; set; } = new List<Flight>();
 
 }

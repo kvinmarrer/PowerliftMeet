@@ -12,8 +12,8 @@ using PowerliftMeet.Database;
 namespace PowerliftMeet.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260615121927_initschema")]
-    partial class initschema
+    [Migration("20260616093510_SeedWeightClasses")]
+    partial class SeedWeightClasses
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,8 +41,9 @@ namespace PowerliftMeet.Database.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("GenderId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -51,8 +52,6 @@ namespace PowerliftMeet.Database.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClubId");
-
-                    b.HasIndex("GenderId");
 
                     b.ToTable("Athletes");
                 });
@@ -121,21 +120,6 @@ namespace PowerliftMeet.Database.Migrations
                     b.ToTable("Flights");
                 });
 
-            modelBuilder.Entity("PowerliftMeet.Database.Entities.Gender", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Genders");
-                });
-
             modelBuilder.Entity("PowerliftMeet.Database.Entities.LiftCard", b =>
                 {
                     b.Property<Guid>("Id")
@@ -158,8 +142,8 @@ namespace PowerliftMeet.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -169,6 +153,10 @@ namespace PowerliftMeet.Database.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -186,6 +174,18 @@ namespace PowerliftMeet.Database.Migrations
                     b.Property<Guid>("AthleteId")
                         .HasColumnType("uuid");
 
+                    b.Property<decimal?>("BodyWeight")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("Equipment")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("FlightId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("Lot")
+                        .HasColumnType("integer");
+
                     b.Property<Guid>("MeetId")
                         .HasColumnType("uuid");
 
@@ -195,6 +195,8 @@ namespace PowerliftMeet.Database.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AthleteId");
+
+                    b.HasIndex("FlightId");
 
                     b.HasIndex("MeetId");
 
@@ -209,17 +211,84 @@ namespace PowerliftMeet.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("GenderId")
-                        .HasColumnType("uuid");
-
                     b.Property<int>("Weight")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GenderId");
-
                     b.ToTable("WeightClasses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0001-000000000001"),
+                            Weight = 59
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0001-000000000002"),
+                            Weight = 66
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0001-000000000003"),
+                            Weight = 74
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0001-000000000004"),
+                            Weight = 83
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0001-000000000005"),
+                            Weight = 93
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0001-000000000006"),
+                            Weight = 105
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0001-000000000007"),
+                            Weight = 120
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0002-000000000001"),
+                            Weight = 47
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0002-000000000002"),
+                            Weight = 52
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0002-000000000003"),
+                            Weight = 57
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0002-000000000004"),
+                            Weight = 63
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0002-000000000005"),
+                            Weight = 69
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0002-000000000006"),
+                            Weight = 76
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0002-000000000007"),
+                            Weight = 84
+                        });
                 });
 
             modelBuilder.Entity("PowerliftMeet.Database.Entities.Athlete", b =>
@@ -230,15 +299,7 @@ namespace PowerliftMeet.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PowerliftMeet.Database.Entities.Gender", "Gender")
-                        .WithMany()
-                        .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Club");
-
-                    b.Navigation("Gender");
                 });
 
             modelBuilder.Entity("PowerliftMeet.Database.Entities.Attempt", b =>
@@ -255,7 +316,7 @@ namespace PowerliftMeet.Database.Migrations
             modelBuilder.Entity("PowerliftMeet.Database.Entities.Flight", b =>
                 {
                     b.HasOne("PowerliftMeet.Database.Entities.Meet", "Meet")
-                        .WithMany()
+                        .WithMany("Flights")
                         .HasForeignKey("MeetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -282,8 +343,12 @@ namespace PowerliftMeet.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PowerliftMeet.Database.Entities.Meet", "Meet")
+                    b.HasOne("PowerliftMeet.Database.Entities.Flight", "Flight")
                         .WithMany()
+                        .HasForeignKey("FlightId");
+
+                    b.HasOne("PowerliftMeet.Database.Entities.Meet", "Meet")
+                        .WithMany("MeetAthletes")
                         .HasForeignKey("MeetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -296,20 +361,18 @@ namespace PowerliftMeet.Database.Migrations
 
                     b.Navigation("Athlete");
 
+                    b.Navigation("Flight");
+
                     b.Navigation("Meet");
 
                     b.Navigation("WeightClass");
                 });
 
-            modelBuilder.Entity("PowerliftMeet.Database.Entities.WeightClass", b =>
+            modelBuilder.Entity("PowerliftMeet.Database.Entities.Meet", b =>
                 {
-                    b.HasOne("PowerliftMeet.Database.Entities.Gender", "Gender")
-                        .WithMany()
-                        .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Flights");
 
-                    b.Navigation("Gender");
+                    b.Navigation("MeetAthletes");
                 });
 #pragma warning restore 612, 618
         }

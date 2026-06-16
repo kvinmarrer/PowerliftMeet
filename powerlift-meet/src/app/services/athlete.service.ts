@@ -13,11 +13,7 @@ export interface Athlete {
     name: string;
     description: string;
   };
-  genderId: string;
-  genderDto: {
-    id: string;
-    name: string;
-  };
+  gender: string;
   dateOfBirth: string;
 }
 
@@ -25,7 +21,7 @@ export interface CreateAthleteRequest {
   firstName: string;
   lastName: string;
   clubId: string;
-  genderId: string;
+  gender: string;
   dateOfBirth: string;
 }
 
@@ -33,7 +29,7 @@ export interface EditAthleteRequest {
   firstName: string;
   lastName: string;
   clubId: string;
-  genderId: string;
+  gender: string;
   dateOfBirth: string;
 }
 

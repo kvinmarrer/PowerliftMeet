@@ -6,35 +6,73 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PowerliftMeet.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class initschema : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Athletes_WeightClasses_WeightClassId",
-                table: "Athletes");
+            migrationBuilder.CreateTable(
+                name: "Clubs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clubs", x => x.Id);
+                });
 
-            migrationBuilder.DropColumn(
-                name: "Gender",
-                table: "Athletes");
+            migrationBuilder.CreateTable(
+                name: "Meets",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Date = table.Column<DateOnly>(type: "date", nullable: false),
+                    Location = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Status = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Meets", x => x.Id);
+                });
 
-            migrationBuilder.RenameColumn(
-                name: "WeightClassId",
-                table: "Athletes",
-                newName: "GenderId");
+            migrationBuilder.CreateTable(
+                name: "WeightClasses",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Weight = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WeightClasses", x => x.Id);
+                });
 
-            migrationBuilder.RenameIndex(
-                name: "IX_Athletes_WeightClassId",
-                table: "Athletes",
-                newName: "IX_Athletes_GenderId");
-
-            migrationBuilder.AddColumn<Guid>(
-                name: "GenderId",
-                table: "WeightClasses",
-                type: "uuid",
-                nullable: false,
-                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
+            migrationBuilder.CreateTable(
+                name: "Athletes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    ClubId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Gender = table.Column<string>(type: "text", nullable: false),
+                    FirstName = table.Column<string>(type: "text", nullable: false),
+                    LastName = table.Column<string>(type: "text", nullable: false),
+                    DateOfBirth = table.Column<DateOnly>(type: "date", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Athletes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Athletes_Clubs_ClubId",
+                        column: x => x.ClubId,
+                        principalTable: "Clubs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Flights",
@@ -56,25 +94,17 @@ namespace PowerliftMeet.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Genders",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Genders", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "MeetAthletes",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     WeightClassId = table.Column<Guid>(type: "uuid", nullable: false),
                     MeetId = table.Column<Guid>(type: "uuid", nullable: false),
-                    AthleteId = table.Column<Guid>(type: "uuid", nullable: false)
+                    AthleteId = table.Column<Guid>(type: "uuid", nullable: false),
+                    FlightId = table.Column<Guid>(type: "uuid", nullable: true),
+                    BodyWeight = table.Column<decimal>(type: "numeric", nullable: true),
+                    Lot = table.Column<int>(type: "integer", nullable: true),
+                    Equipment = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -85,6 +115,11 @@ namespace PowerliftMeet.Database.Migrations
                         principalTable: "Athletes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MeetAthletes_Flights_FlightId",
+                        column: x => x.FlightId,
+                        principalTable: "Flights",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_MeetAthletes_Meets_MeetId",
                         column: x => x.MeetId,
@@ -139,9 +174,9 @@ namespace PowerliftMeet.Database.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_WeightClasses_GenderId",
-                table: "WeightClasses",
-                column: "GenderId");
+                name: "IX_Athletes_ClubId",
+                table: "Athletes",
+                column: "ClubId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Attempts_LiftCardId",
@@ -164,6 +199,11 @@ namespace PowerliftMeet.Database.Migrations
                 column: "AthleteId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MeetAthletes_FlightId",
+                table: "MeetAthletes",
+                column: "FlightId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MeetAthletes_MeetId",
                 table: "MeetAthletes",
                 column: "MeetId");
@@ -172,43 +212,13 @@ namespace PowerliftMeet.Database.Migrations
                 name: "IX_MeetAthletes_WeightClassId",
                 table: "MeetAthletes",
                 column: "WeightClassId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Athletes_Genders_GenderId",
-                table: "Athletes",
-                column: "GenderId",
-                principalTable: "Genders",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_WeightClasses_Genders_GenderId",
-                table: "WeightClasses",
-                column: "GenderId",
-                principalTable: "Genders",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Athletes_Genders_GenderId",
-                table: "Athletes");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_WeightClasses_Genders_GenderId",
-                table: "WeightClasses");
-
             migrationBuilder.DropTable(
                 name: "Attempts");
-
-            migrationBuilder.DropTable(
-                name: "Flights");
-
-            migrationBuilder.DropTable(
-                name: "Genders");
 
             migrationBuilder.DropTable(
                 name: "LiftCards");
@@ -216,38 +226,20 @@ namespace PowerliftMeet.Database.Migrations
             migrationBuilder.DropTable(
                 name: "MeetAthletes");
 
-            migrationBuilder.DropIndex(
-                name: "IX_WeightClasses_GenderId",
-                table: "WeightClasses");
+            migrationBuilder.DropTable(
+                name: "Athletes");
 
-            migrationBuilder.DropColumn(
-                name: "GenderId",
-                table: "WeightClasses");
+            migrationBuilder.DropTable(
+                name: "Flights");
 
-            migrationBuilder.RenameColumn(
-                name: "GenderId",
-                table: "Athletes",
-                newName: "WeightClassId");
+            migrationBuilder.DropTable(
+                name: "WeightClasses");
 
-            migrationBuilder.RenameIndex(
-                name: "IX_Athletes_GenderId",
-                table: "Athletes",
-                newName: "IX_Athletes_WeightClassId");
+            migrationBuilder.DropTable(
+                name: "Clubs");
 
-            migrationBuilder.AddColumn<string>(
-                name: "Gender",
-                table: "Athletes",
-                type: "text",
-                nullable: false,
-                defaultValue: "");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Athletes_WeightClasses_WeightClassId",
-                table: "Athletes",
-                column: "WeightClassId",
-                principalTable: "WeightClasses",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.DropTable(
+                name: "Meets");
         }
     }
 }
