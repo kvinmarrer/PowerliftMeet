@@ -14,6 +14,9 @@ export class HeaderComponent {
   @Input() icon?: string;
   @Input() title?: string;
   @Input() subtitle?: string;
+
+  @Input() showBack: boolean = false;
+  @Input() backHref: string = '/tabs/home';
   translate?: TranslateService;
 
   constructor(translateService: TranslateService) {

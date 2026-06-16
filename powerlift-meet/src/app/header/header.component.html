@@ -1,7 +1,7 @@
 <ion-header class="header" [translucent]="true">
   <ion-toolbar class="header__container">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+    <ion-buttons slot="start" *ngIf="showBack">
+      <ion-back-button [defaultHref]="backHref"></ion-back-button>
     </ion-buttons>
     <div class="header__container__titles">
       <span *ngIf="icon" class="material-icons header__container__titles__icon">{{ icon }}</span>
