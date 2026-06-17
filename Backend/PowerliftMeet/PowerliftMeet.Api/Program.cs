@@ -20,6 +20,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddTransient<IMeetLogic, MeetLogic>();
 builder.Services.AddTransient<IAthleteLogic, AthleteLogic>();
 builder.Services.AddTransient<IClubLogic, ClubLogic>();
+builder.Services.AddTransient<IMeetAthleteLogic, MeetAthleteLogic>();
+builder.Services.AddTransient<IWeightClassLogic, WeightClassLogic>();
 builder.Services.AddControllers();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 

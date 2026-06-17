@@ -3,6 +3,7 @@ import { MeetService } from '../services/meet.service';
 import { IonModal } from '@ionic/angular';
 import { ViewChild } from '@angular/core';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -14,8 +15,11 @@ export class HomePage implements OnInit {
 
   meets: any[] = [];
 
-  constructor(private meetService: MeetService) {}
+  constructor(private meetService: MeetService, private router: Router) {}
 
+  goToMeet(meetId: string) {
+    this.router.navigate(['/tabs/meet', meetId]);
+  }
   
   loadMeets() {
     this.meetService.getMeets().subscribe({

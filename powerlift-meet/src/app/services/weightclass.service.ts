@@ -18,4 +18,8 @@ export class WeightClassService {
     return this.http.get<WeightClass[]>(this.apiUrl);
   }
 
+  getWeightClassesByAthleteGender(athleteId: string) {
+    return this.http.get<WeightClass[]>(`${this.apiUrl}/by-athlete-gender/${athleteId}`);
+  }
+
 }

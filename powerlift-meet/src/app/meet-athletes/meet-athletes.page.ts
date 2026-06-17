@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
+import { MeetAthlete, MeetAthleteService } from '../services/meetathlete.service';
+import { Athlete, AthleteService } from '../services/athlete.service';
+import { WeightClass, WeightClassService } from '../services/weightclass.service';
 
 
 @Component({
@@ -10,13 +15,99 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MeetAthletesPage implements OnInit {
 
+  meetAthletes: MeetAthlete[] = [];
+  filteredMeetAthletes: MeetAthlete[] = [];
+  allAthletes: Athlete[] = [];
   meet_detail_link: string = '';
+  meetId: string = '';
+  searchTerm: string = '';
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private meetAthleteService: MeetAthleteService, private athleteService: AthleteService, private weightClassService: WeightClassService) { }
+
+  loadMeetAthletes() {
+    if (this.meetId) {
+      this.meetAthleteService.getMeetAthletesByMeetId(this.meetId).subscribe({
+        next: (data) => {
+          this.meetAthletes = data;
+          this.onSearchInput();
+        },
+        error: (err) => console.error('Error fetching meet athletes', err)
+      });
+    }
+  }
 
   ngOnInit() {
-    const meetId = this.route.snapshot.paramMap.get('id');
-    meetId ? this.meet_detail_link = `/tabs/meet/${meetId}` : this.meet_detail_link = '/tabs/home';
+    this.meetId = this.route.snapshot.paramMap.get('meetId') || '';
+    this.meet_detail_link = this.meetId ? `/tabs/meet/${this.meetId}` : '/tabs/home';
+
+    this.loadMeetAthletes();
+
+    this.athleteService.getAthletes().subscribe({
+      next: (data) => {
+        this.allAthletes = data;
+      },
+      error: (err) => console.error('Error fetching all athletes', err)
+    });
   }
+
+  get availableAthletes(): Athlete[] {
+    const meetAthleteIds = new Set(this.meetAthletes.map(ma => ma.athleteId));
+    return this.allAthletes.filter(athlete => !meetAthleteIds.has(athlete.id));
+  }
+
+  onSearchInput() {
+    const searchTerm = this.searchTerm.toLowerCase();
+    this.filteredMeetAthletes = this.meetAthletes.filter(ma => {
+      const fullName = `${ma.athleteDto.firstName} ${ma.athleteDto.lastName}`.toLowerCase();
+      return fullName.includes(searchTerm) || ma.athleteDto.clubDto.name.toLowerCase().includes(searchTerm);
+    });
+  }
+
+  @ViewChild('addMeetAthleteModal') addMeetAthleteModal!: IonModal;
+
+  athletes: Athlete[] = [];
+  filteredWeightClasses: WeightClass[] = [];
+  selectedAthleteId: string = '';
+  selectedWeightClassId: string = '';
+  selectedEquipment: string = '';
+  lot: number | null = null;
+  bodyweight: number | null = null;
+
+  onAthleteSelected() {
+    this.weightClassService.getWeightClassesByAthleteGender(this.selectedAthleteId).subscribe({
+      next: (data) => {
+        this.filteredWeightClasses = data;
+      },
+      error: (err) => console.error('Error fetching weight classes for selected athlete', err)
+    });
+  }
+
+  cancel() {
+      this.addMeetAthleteModal.dismiss(null, 'cancel');
+    }
+  
+    confirm() {
+      const newMeetAthlete = {
+        athleteId: this.selectedAthleteId,
+        weightClassId: this.selectedWeightClassId,
+        equipment: this.selectedEquipment,
+        lot: this.lot || 0,
+        bodyWeight: this.bodyweight || 0
+      };
+      this.addMeetAthleteModal.dismiss(newMeetAthlete, 'confirm');
+    }
+
+    onWillDismiss(event: CustomEvent<OverlayEventDetail>) {
+      if (event.detail.role === 'confirm') {
+        const meetAthlete = event.detail.data;
+        this.meetAthleteService.addMeetAthleteToMeet(this.meetId, meetAthlete).subscribe({
+          next: () => {
+            this.loadMeetAthletes();
+          },
+          error: (err) => console.error('Error adding meet athlete', err)
+        });
+      }
+    }
+  
 
 }

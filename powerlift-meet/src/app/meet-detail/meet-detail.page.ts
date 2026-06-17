@@ -22,6 +22,9 @@ export class MeetDetailPage implements OnInit {
   ) {}
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     const id = this.route.snapshot.paramMap.get('id')!;
     this.meetService.getMeetById(id).subscribe(meet => {
       this.meet = meet;

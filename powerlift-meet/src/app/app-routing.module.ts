@@ -23,7 +23,7 @@ const routes: Routes = [
         loadChildren: () => import('./meet-detail/meet-detail.module').then(m => m.MeetDetailPageModule)
       },
       {
-        path: 'meet-athletes',
+        path: 'meet-athletes/:meetId',
         loadChildren: () => import('./meet-athletes/meet-athletes.module').then( m => m.MeetAthletesPageModule)
       },
       {

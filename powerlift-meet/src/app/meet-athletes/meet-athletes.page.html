@@ -1,16 +1,92 @@
-<app-header [showBack]="true" [backHref]="meet_detail_link" title="{{ 'MEET.ATHLETES' | translate }}"></app-header>
+<app-header [showBack]="true" [backHref]="meet_detail_link" title="{{ 'MEET_ATHLETES.TITLE' | translate }}"></app-header>
 
 <ion-content>
   <ion-toolbar>
     <ion-searchbar
-      placeholder="Name suchen..."
+      placeholder="{{ 'MEET_ATHLETES.SEARCH.PLACEHOLDER' | translate }}"
       debounce="200"
+      [(ngModel)]="searchTerm"
+      (ionInput)="onSearchInput()"
       >
     </ion-searchbar>
   </ion-toolbar>
 
-  <ion-list>
+
+  <ion-list *ngFor="let meetAthlete of filteredMeetAthletes">
+    <ion-item [routerLink]="['/meet-athletes', meetAthlete.id]">
+      <ion-label>
+        <h2>{{ meetAthlete.athleteDto.firstName }} {{ meetAthlete.athleteDto.lastName }}</h2>
+        <p>{{ 'MEET_ATHLETES.WEIGHT_CLASS' | translate }}: {{ meetAthlete.weightClassDto.weight }} kg</p>
+        <p>{{ 'MEET_ATHLETES.BIRTH_YEAR' | translate }}: {{ meetAthlete.athleteDto.dateOfBirth | date:'yyyy' }}</p>
+        <p>{{ 'MEET_ATHLETES.BODY_WEIGHT' | translate }}: {{ meetAthlete.bodyWeight }} kg</p>
+        <p>{{ 'MEET_ATHLETES.LOT' | translate }}: {{ meetAthlete.lot }}</p>
+      </ion-label>
+    </ion-item>
 
   </ion-list>
+
+  <ion-button id="open-meet-athlete-add-modal" expand="block" class="meet-athlete-modal-button">{{ 'MEET_ATHLETES.ADD_ATHLETE' | translate }}</ion-button>
+  <ion-modal trigger="open-meet-athlete-add-modal" class="meet-athlete-modal" (willDismiss)="onWillDismiss($event)" #addMeetAthleteModal>
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">{{ 'MEET.CANCEL' | translate }}</ion-button>
+          </ion-buttons>
+          <ion-title>{{ 'MEET_ATHLETES.ADD_ATHLETE' | translate }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">{{ 'MEET_ATHLETES.CONFIRM' | translate }}</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-list>
+          
+          <ion-item>
+            <ion-select
+              label="{{ 'MEET_ATHLETES.ATHLETE' | translate }}"
+              labelPlacement="stacked"
+              [(ngModel)]="selectedAthleteId"
+              (ionChange)="onAthleteSelected()">
+              <ion-select-option *ngFor="let a of availableAthletes" [value]="a.id">
+                {{ a.firstName }} {{ a.lastName }} — {{ a.clubDto?.name }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-select
+              label="{{ 'MEET_ATHLETES.WEIGHT_CLASS' | translate }}"
+              labelPlacement="stacked"
+              [(ngModel)]="selectedWeightClassId"
+              [disabled]="!selectedAthleteId">
+              <ion-select-option *ngFor="let wc of filteredWeightClasses" [value]="wc.id">
+                {{ wc.weight }} kg
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-input
+              label="{{ 'MEET_ATHLETES.LOT' | translate }}"
+              labelPlacement="stacked"
+              type="number"
+              [(ngModel)]="lot">
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input
+              label="{{ 'MEET_ATHLETES.BODY_WEIGHT' | translate }}"
+              labelPlacement="stacked"
+              type="number"
+              [(ngModel)]="bodyweight"
+            ></ion-input>
+          </ion-item>
+
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
 

@@ -48,16 +48,26 @@
       "OTHER": "Other"
     }
   },
-  "WEIGH_IN": {
-    "TITLE": "Weigh-In",
-    "SUBTITLE": "Weigh the athletes in"
-  },
-  "LIFT_ENTRY": {
-    "TITLE": "Lift Entry",
-    "SUBTITLE": "Enter the lifts of the athletes"
-  },
-  "SCOREBOARD": {
-    "TITLE": "Scoreboard",
-    "SUBTITLE": "Current results"
+  "MEET_ATHLETES": {
+    "TITLE": "Meet Athletes",
+    "SUBTITLE": "List of athletes participating in the meet",
+    "ADD_ATHLETE": "Add Athlete",
+    "CANCEL": "Cancel",
+    "CONFIRM": "Confirm",
+    "SEARCH": {
+      "PLACEHOLDER": "Search by name ..."
+    },
+    "ATHLETE_SELECTION": {
+      "PLACEHOLDER": "Select an athlete"
+    },
+    "NO_AVAILABLE_ATHLETES": "No available athletes to add.",
+    "WEIGHT_CLASS": "Weight Class",
+    "CLUB": "Club",
+    "GENDER": "Gender",
+    "LOT": "Lot",
+    "BIRTH_YEAR": "Birth Year",
+    "BODY_WEIGHT": "Body Weight",
+    "ATHLETE": "Athlete"
   }
+    
 }

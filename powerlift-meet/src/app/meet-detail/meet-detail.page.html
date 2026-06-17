@@ -11,7 +11,7 @@
 
   <ion-list>
 
-    <ion-item [routerLink]="['/tabs/meet-athletes']" detail="true">
+    <ion-item [routerLink]="['/tabs/meet-athletes', meet?.id]" detail="true">
       <ion-icon slot="start" name="people-outline" color="primary"></ion-icon>
       <ion-label>
         <h2>{{ 'MEET.ATHLETES' | translate }}</h2>

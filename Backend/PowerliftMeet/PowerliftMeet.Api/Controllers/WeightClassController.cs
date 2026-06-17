@@ -33,4 +33,19 @@ public class WeightClassController : ControllerBase
         }
     }
 
+    [HttpGet("by-athlete-gender/{athleteId}")]
+    public async Task<ActionResult<IEnumerable<WeightClassDto>>> GetWeightClassesByAthleteGender(Guid athleteId)
+    {
+        try
+        {
+            var weightClasses = await _weightClassLogic.GetWeightClassesByAthleteGenderAsync(athleteId);
+            return Ok(weightClasses);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"Error occurred while fetching weight classes for athlete ID: {athleteId}");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
 }

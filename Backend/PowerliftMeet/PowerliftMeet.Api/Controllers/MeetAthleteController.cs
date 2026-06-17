@@ -1,0 +1,66 @@
+using Microsoft.AspNetCore.Mvc;
+using PowerliftMeet.Api.DTOs;
+using PowerliftMeet.Api.Logic;
+
+namespace PowerliftMeet.Api.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class MeetAthleteController : ControllerBase
+{
+
+    private readonly ILogger<MeetAthleteController> _logger; 
+    private readonly IMeetAthleteLogic _meetAthleteLogic;
+
+    public MeetAthleteController(ILogger<MeetAthleteController> logger, IMeetAthleteLogic meetAthleteLogic)
+    {
+        _logger = logger;
+        _meetAthleteLogic = meetAthleteLogic;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<MeetAthleteDto>>> GetMeetAthletes()
+    {
+        try
+        {
+            var meetAthletes = await _meetAthleteLogic.GetMeetAthletesAsync();
+            return Ok(meetAthletes);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while fetching meet athletes.");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
+    [HttpGet("meet/{meetId}")]
+    public async Task<ActionResult<IEnumerable<MeetAthleteDto>>> GetMeetAthletesByMeetId(Guid meetId)
+    {
+        try
+        {
+            var meetAthletes = await _meetAthleteLogic.GetMeetAthletesByMeetIdAsync(meetId);
+            return Ok(meetAthletes);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while fetching meet athletes by meet ID.");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
+    [HttpPost("meet/{meetId}")]
+    public async Task<ActionResult<MeetAthleteDto>> AddMeetAthleteToMeet(Guid meetId, [FromBody] CreateMeetAthleteRequestDto request)
+    {
+        try
+        {
+            var meetAthlete = await _meetAthleteLogic.AddMeetAthleteToMeetAsync(meetId, request);
+            return Ok(meetAthlete);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while adding meet athlete to meet.");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
+}

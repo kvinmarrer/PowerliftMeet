@@ -48,16 +48,26 @@
       "OTHER": "Divers"
     }
   },
-  "WEIGH_IN": {
-    "TITLE": "Wiegen",
-    "SUBTITLE": "Wiege die Athleten ein"
-  },
-  "LIFT_ENTRY": {
-    "TITLE": "Lift-Eingabe",
-    "SUBTITLE": "Gib die Lifts der Athleten ein"
-  },
-  "SCOREBOARD": {
-    "TITLE": "Scoreboard",
-    "SUBTITLE": "Aktuelle Ergebnisse"
+  "MEET_ATHLETES": {
+    "TITLE": "Wettkampf Athleten",
+    "SUBTITLE": "Liste der Athleten, die am Wettkampf teilnehmen",
+    "ADD_ATHLETE": "Athlet hinzufügen",
+    "CANCEL": "Abbrechen",
+    "CONFIRM": "Bestätigen",
+    "SEARCH": {
+      "PLACEHOLDER": "Name suchen..."
+    },
+    "ATHLETE_SELECTION": {
+      "PLACEHOLDER": "Athlet auswählen"
+    },
+    "NO_AVAILABLE_ATHLETES": "Keine verfügbaren Athleten zum Hinzufügen.",
+    "WEIGHT_CLASS": "Gewichtsklasse",
+    "CLUB": "Verein",
+    "GENDER": "Geschlecht",
+    "LOT": "Los",
+    "BIRTH_YEAR": "Geburtsjahr",
+    "BODY_WEIGHT": "Körpergewicht",
+    "ATHLETE": "Athlet"
   }
+
 }

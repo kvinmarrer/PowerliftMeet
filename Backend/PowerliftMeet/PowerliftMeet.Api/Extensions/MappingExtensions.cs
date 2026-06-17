@@ -52,15 +52,13 @@ public static class MappingExtensions
         {
             Id = meetAthlete.Id,
             MeetId = meetAthlete.MeetId,
+            MeetDto = meetAthlete.Meet.ToDto(),
             AthleteId = meetAthlete.AthleteId,
-            Athlete = meetAthlete.Athlete.ToDto(),
+            AthleteDto = meetAthlete.Athlete.ToDto(),
             WeightClassId = meetAthlete.WeightClassId,
-            WeightClass = meetAthlete.WeightClass.ToDto(),
-            FlightId = meetAthlete.FlightId,
-            Flight = meetAthlete.Flight?.ToDto(),
+            WeightClassDto = meetAthlete.WeightClass.ToDto(),
             BodyWeight = meetAthlete.BodyWeight,
             Lot = meetAthlete.Lot,
-            Equipment = meetAthlete.Equipment
         };
     }
 
