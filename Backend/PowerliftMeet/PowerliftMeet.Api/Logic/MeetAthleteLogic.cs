@@ -44,10 +44,7 @@ public class MeetAthleteLogic : IMeetAthleteLogic
         {
             MeetId = meetId,
             AthleteId = request.AthleteId,
-            WeightClassId = request.WeightClassId,
-            Equipment = request.Equipment,
-            Lot = request.Lot,
-            BodyWeight = request.BodyWeight
+            WeightClassId = request.WeightClassId
         };
 
         _dbContext.MeetAthletes.Add(meetAthlete);
@@ -61,5 +58,17 @@ public class MeetAthleteLogic : IMeetAthleteLogic
             .FirstAsync(ma => ma.Id == meetAthlete.Id);
 
         return createdMeetAthlete.ToDto();
+    }
+
+    public async Task DeleteMeetAthleteAsync(Guid meetAthleteId)
+    {
+        var meetAthlete = await _dbContext.MeetAthletes.FindAsync(meetAthleteId);
+        if (meetAthlete == null)
+        {
+            throw new KeyNotFoundException($"MeetAthlete with ID {meetAthleteId} not found.");
+        }
+
+        _dbContext.MeetAthletes.Remove(meetAthlete);
+        await _dbContext.SaveChangesAsync();
     }
 }

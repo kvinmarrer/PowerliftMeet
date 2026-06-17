@@ -37,11 +37,11 @@
   <ng-container >
     <ion-button expand="block" [routerLink]="['/tabs/lift-entry']" style="margin-top: 8px;">
       <ion-icon slot="start" name="barbell-outline"></ion-icon>
-      Lift-Eingabe
+      {{ 'LIFT_ENTRY.TITLE' | translate }}
     </ion-button>
     <ion-button expand="block" fill="outline" [routerLink]="['/tabs/scoreboard']">
       <ion-icon slot="start" name="stats-chart-outline"></ion-icon>
-      Scoreboard
+      {{ 'SCOREBOARD.TITLE' | translate }}
     </ion-button>
   </ng-container>
 

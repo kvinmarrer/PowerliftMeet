@@ -25,21 +25,36 @@ public class AppDbContext : DbContext
         // Seed WeightClasses
         modelBuilder.Entity<WeightClass>().HasData(
             // Herren
-            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0001-000000000001"), Weight = 59},
-            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0001-000000000002"), Weight = 66},
-            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0001-000000000003"), Weight = 74},
-            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0001-000000000004"), Weight = 83},
-            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0001-000000000005"), Weight = 93},
-            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0001-000000000006"), Weight = 105},
-            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0001-000000000007"), Weight = 120},
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0001-000000000001"), Weight = 59, IsMen = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0001-000000000002"), Weight = 66, IsMen = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0001-000000000003"), Weight = 74, IsMen = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0001-000000000004"), Weight = 83, IsMen = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0001-000000000005"), Weight = 93, IsMen = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0001-000000000006"), Weight = 105, IsMen = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0001-000000000007"), Weight = 120, IsMen = true },
             // Damen
-            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0002-000000000001"), Weight = 47 },
-            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0002-000000000002"), Weight = 52 },
-            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0002-000000000003"), Weight = 57 },
-            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0002-000000000004"), Weight = 63 },
-            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0002-000000000005"), Weight = 69 },
-            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0002-000000000006"), Weight = 76 },
-            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0002-000000000007"), Weight = 84 }
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0002-000000000001"), Weight = 47, IsWomen = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0002-000000000002"), Weight = 52, IsWomen = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0002-000000000003"), Weight = 57, IsWomen = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0002-000000000004"), Weight = 63, IsWomen = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0002-000000000005"), Weight = 69, IsWomen = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0002-000000000006"), Weight = 76, IsWomen = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0002-000000000007"), Weight = 84, IsWomen = true },
+            // Diverse
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0003-000000000001"), Weight = 59, IsOther = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0003-000000000002"), Weight = 66, IsOther = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0003-000000000003"), Weight = 74, IsOther = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0003-000000000004"), Weight = 83, IsOther = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0003-000000000005"), Weight = 93, IsOther = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0003-000000000006"), Weight = 105, IsOther = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0003-000000000007"), Weight = 120, IsOther = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0003-000000000008"), Weight = 47, IsOther = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0003-000000000009"), Weight = 52, IsOther = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0003-000000000010"), Weight = 57, IsOther = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0003-000000000011"), Weight = 63, IsOther = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0003-000000000012"), Weight = 69, IsOther = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0003-000000000013"), Weight = 76, IsOther = true },
+            new WeightClass { Id = Guid.Parse("00000000-0000-0000-0003-000000000014"), Weight = 84, IsOther = true }
         );
 
         modelBuilder.Entity<Club>().HasData(

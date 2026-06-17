@@ -63,4 +63,19 @@ public class MeetAthleteController : ControllerBase
         }
     }
 
+    [HttpDelete("{meetAthleteId}")]
+    public async Task<IActionResult> DeleteMeetAthlete(Guid meetAthleteId)
+    {
+        try
+        {
+            await _meetAthleteLogic.DeleteMeetAthleteAsync(meetAthleteId);
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while deleting meet athlete.");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
 }

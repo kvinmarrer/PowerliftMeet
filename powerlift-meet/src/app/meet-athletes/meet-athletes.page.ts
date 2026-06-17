@@ -69,9 +69,6 @@ export class MeetAthletesPage implements OnInit {
   filteredWeightClasses: WeightClass[] = [];
   selectedAthleteId: string = '';
   selectedWeightClassId: string = '';
-  selectedEquipment: string = '';
-  lot: number | null = null;
-  bodyweight: number | null = null;
 
   onAthleteSelected() {
     this.weightClassService.getWeightClassesByAthleteGender(this.selectedAthleteId).subscribe({
@@ -89,10 +86,7 @@ export class MeetAthletesPage implements OnInit {
     confirm() {
       const newMeetAthlete = {
         athleteId: this.selectedAthleteId,
-        weightClassId: this.selectedWeightClassId,
-        equipment: this.selectedEquipment,
-        lot: this.lot || 0,
-        bodyWeight: this.bodyweight || 0
+        weightClassId: this.selectedWeightClassId
       };
       this.addMeetAthleteModal.dismiss(newMeetAthlete, 'confirm');
     }
@@ -108,6 +102,29 @@ export class MeetAthletesPage implements OnInit {
         });
       }
     }
-  
 
+    deleteMeetAthlete(meetAthleteId: string) {
+      this.meetAthleteService.deleteMeetAthlete(meetAthleteId).subscribe({
+        next: () => { 
+          this.loadMeetAthletes();
+        },
+        error: (err) => console.error('Error deleting meet athlete', err)
+      });
+    }
+
+
+    getAgeClass(dateOfBirth: string): string {
+      const birthYear = new Date(dateOfBirth).getFullYear();
+      const currentYear = new Date().getFullYear();
+      const age = currentYear - birthYear;
+
+      if (age < 18) {
+        return 'Junior';
+      } else if (age >= 18 && age < 40) {
+        return 'Open';
+      } 
+
+      return 'Master';
+    }
+  
 }

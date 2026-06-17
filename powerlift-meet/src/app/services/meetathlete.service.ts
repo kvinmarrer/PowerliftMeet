@@ -46,4 +46,8 @@ export class MeetAthleteService {
     return this.http.post<MeetAthlete>(`${this.apiUrl}/meet/${meetId}`, meetAthlete);
   }
 
+  deleteMeetAthlete(meetAthleteId: string) {
+    return this.http.delete(`${this.apiUrl}/${meetAthleteId}`);
+  }
+
 }

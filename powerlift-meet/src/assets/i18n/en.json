@@ -17,7 +17,9 @@
     "CANCEL": "Cancel",
     "CONFIRM": "Confirm",
     "NAME": "Name",
-    "ADD_MEET": "Add Meet"
+    "ADD_MEET": "Add Meet",
+    "ATHLETES": "Athletes",
+    "START": "Start Meet"
   },
   "ATHLETES": {
     "TITLE": "Athletes",
@@ -67,7 +69,16 @@
     "LOT": "Lot",
     "BIRTH_YEAR": "Birth Year",
     "BODY_WEIGHT": "Body Weight",
+    "AGE_CLASS": "Age Class",
     "ATHLETE": "Athlete"
+  },
+  "LIFT_ENTRY": {
+    "TITLE": "Lift Entry",
+    "SUBTITLE": "Enter the lifts of the athletes"
+  },
+  "SCOREBOARD": {
+    "TITLE": "Scoreboard",
+    "SUBTITLE": "Current results of the meet"
   }
     
 }

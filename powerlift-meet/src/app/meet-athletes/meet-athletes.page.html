@@ -17,10 +17,11 @@
       <ion-label>
         <h2>{{ meetAthlete.athleteDto.firstName }} {{ meetAthlete.athleteDto.lastName }}</h2>
         <p>{{ 'MEET_ATHLETES.WEIGHT_CLASS' | translate }}: {{ meetAthlete.weightClassDto.weight }} kg</p>
-        <p>{{ 'MEET_ATHLETES.BIRTH_YEAR' | translate }}: {{ meetAthlete.athleteDto.dateOfBirth | date:'yyyy' }}</p>
-        <p>{{ 'MEET_ATHLETES.BODY_WEIGHT' | translate }}: {{ meetAthlete.bodyWeight }} kg</p>
-        <p>{{ 'MEET_ATHLETES.LOT' | translate }}: {{ meetAthlete.lot }}</p>
+        <p>{{ 'MEET_ATHLETES.AGE_CLASS' | translate }}: {{ getAgeClass(meetAthlete.athleteDto.dateOfBirth) }}</p>
       </ion-label>
+      <ion-button slot="end" fill="clear" (click)="deleteMeetAthlete(meetAthlete.id)">
+        <ion-icon name="trash-outline" color="danger" class="meet-athlete-delete-icon"></ion-icon>
+      </ion-button>
     </ion-item>
 
   </ion-list>
@@ -64,24 +65,6 @@
                 {{ wc.weight }} kg
               </ion-select-option>
             </ion-select>
-          </ion-item>
-
-          <ion-item>
-            <ion-input
-              label="{{ 'MEET_ATHLETES.LOT' | translate }}"
-              labelPlacement="stacked"
-              type="number"
-              [(ngModel)]="lot">
-            </ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-input
-              label="{{ 'MEET_ATHLETES.BODY_WEIGHT' | translate }}"
-              labelPlacement="stacked"
-              type="number"
-              [(ngModel)]="bodyweight"
-            ></ion-input>
           </ion-item>
 
         </ion-list>

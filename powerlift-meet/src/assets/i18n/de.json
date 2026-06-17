@@ -17,7 +17,9 @@
     "CANCEL": "Abbrechen",
     "CONFIRM": "Bestätigen",
     "NAME": "Name",
-    "ADD_MEET": "Wettkampf hinzufügen"
+    "ADD_MEET": "Wettkampf hinzufügen",
+    "ATHLETES": "Athleten",
+    "START": "Wettkampf starten"
   },
   "ATHLETES": {
     "TITLE": "Athleten",
@@ -67,7 +69,15 @@
     "LOT": "Los",
     "BIRTH_YEAR": "Geburtsjahr",
     "BODY_WEIGHT": "Körpergewicht",
-    "ATHLETE": "Athlet"
+    "ATHLETE": "Athlet",
+    "AGE_CLASS": "Altersklasse"
+  },
+  "LIFT_ENTRY": {
+    "TITLE": "Lift-Eingabe",
+    "SUBTITLE": "Geben Sie die Lifts der Athleten ein"
+  },
+  "SCOREBOARD": {
+    "TITLE": "Rangliste",
+    "SUBTITLE": "Aktuelle Ergebnisse des Wettkampfs"
   }
-
 }
