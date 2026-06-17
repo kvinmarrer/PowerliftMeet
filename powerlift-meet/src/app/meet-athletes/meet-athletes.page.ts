@@ -103,6 +103,37 @@ export class MeetAthletesPage implements OnInit {
       }
     }
 
+    @ViewChild('editMeetAthleteModal') editMeetAthleteModal!: IonModal;
+    selectedMeetAthlete: any | null = null;
+    editedWeightClass: WeightClass = {} as WeightClass;
+
+    openEditMeetAthleteModal(meetAthlete: any) {
+      this.selectedMeetAthlete = meetAthlete;
+      this.selectedWeightClassId = meetAthlete.weightClassId;
+      this.selectedAthleteId = meetAthlete.athleteId;
+      this.onAthleteSelected();
+      this.editMeetAthleteModal.present();
+    }
+
+    cancelEdit() {
+      this.editMeetAthleteModal.dismiss(null, 'cancel');
+    }
+
+    confirmEdit() {
+      this.meetAthleteService.editMeetAthlete(this.selectedMeetAthlete.id, { weightClassId: this.selectedWeightClassId }).subscribe({
+        next: () => {
+          this.loadMeetAthletes();
+        },
+        error: (err) => console.error('Error editing meet athlete', err)
+      });
+
+      this.editMeetAthleteModal.dismiss(null, 'confirm');
+    }
+
+    onEditWillDismiss(event: CustomEvent<OverlayEventDetail>) {
+      this.selectedMeetAthlete = null;
+    }
+
     deleteMeetAthlete(meetAthleteId: string) {
       this.meetAthleteService.deleteMeetAthlete(meetAthleteId).subscribe({
         next: () => { 
@@ -111,7 +142,6 @@ export class MeetAthletesPage implements OnInit {
         error: (err) => console.error('Error deleting meet athlete', err)
       });
     }
-
 
     getAgeClass(dateOfBirth: string): string {
       const birthYear = new Date(dateOfBirth).getFullYear();

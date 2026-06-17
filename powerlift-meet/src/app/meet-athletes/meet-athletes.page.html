@@ -13,13 +13,13 @@
 
 
   <ion-list *ngFor="let meetAthlete of filteredMeetAthletes">
-    <ion-item [routerLink]="['/meet-athletes', meetAthlete.id]">
+    <ion-item class="meet-athlete-item" (click)="openEditMeetAthleteModal(meetAthlete)">
       <ion-label>
         <h2>{{ meetAthlete.athleteDto.firstName }} {{ meetAthlete.athleteDto.lastName }}</h2>
         <p>{{ 'MEET_ATHLETES.WEIGHT_CLASS' | translate }}: {{ meetAthlete.weightClassDto.weight }} kg</p>
         <p>{{ 'MEET_ATHLETES.AGE_CLASS' | translate }}: {{ getAgeClass(meetAthlete.athleteDto.dateOfBirth) }}</p>
       </ion-label>
-      <ion-button slot="end" fill="clear" (click)="deleteMeetAthlete(meetAthlete.id)">
+      <ion-button slot="end" fill="clear" (click)="deleteMeetAthlete(meetAthlete.id); $event.stopPropagation()">
         <ion-icon name="trash-outline" color="danger" class="meet-athlete-delete-icon"></ion-icon>
       </ion-button>
     </ion-item>
@@ -68,6 +68,34 @@
           </ion-item>
 
         </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal trigger="open-meet-athlete-edit-modal" class="meet-athlete-modal" (willDismiss)="onEditWillDismiss($event)" #editMeetAthleteModal>
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancelEdit()">{{ 'MEET.CANCEL' | translate }}</ion-button>
+          </ion-buttons>
+          <ion-title>{{ 'MEET_ATHLETES.EDIT_ATHLETE' | translate }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirmEdit()" [strong]="true">{{ 'MEET_ATHLETES.CONFIRM' | translate }}</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-select
+            label="{{ 'MEET_ATHLETES.WEIGHT_CLASS' | translate }}"
+            labelPlacement="stacked"
+            [(ngModel)]="selectedWeightClassId">
+            <ion-select-option *ngFor="let wc of filteredWeightClasses" [value]="wc.id">
+              {{ wc.weight }} kg
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
       </ion-content>
     </ng-template>
   </ion-modal>

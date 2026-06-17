@@ -56,6 +56,7 @@
     "ADD_ATHLETE": "Athlet hinzufügen",
     "CANCEL": "Abbrechen",
     "CONFIRM": "Bestätigen",
+    "EDIT_ATHLETE": "Athlet bearbeiten",
     "SEARCH": {
       "PLACEHOLDER": "Name suchen..."
     },

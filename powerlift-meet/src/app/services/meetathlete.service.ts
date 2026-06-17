@@ -50,4 +50,8 @@ export class MeetAthleteService {
     return this.http.delete(`${this.apiUrl}/${meetAthleteId}`);
   }
 
+  editMeetAthlete(meetAthleteId: string, updatedMeetAthlete: Partial<MeetAthlete>) {
+    return this.http.put<MeetAthlete>(`${this.apiUrl}/${meetAthleteId}`, updatedMeetAthlete);
+  }
+
 }

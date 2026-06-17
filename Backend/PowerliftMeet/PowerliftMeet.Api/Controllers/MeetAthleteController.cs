@@ -63,6 +63,21 @@ public class MeetAthleteController : ControllerBase
         }
     }
 
+    [HttpPut("{meetAthleteId}")]
+    public async Task<ActionResult<MeetAthleteDto>> EditMeetAthlete(Guid meetAthleteId, [FromBody] EditMeetAthleteDto request)
+    {
+        try
+        {
+            var updatedMeetAthlete = await _meetAthleteLogic.EditMeetAthleteAsync(meetAthleteId, request);
+            return Ok(updatedMeetAthlete);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while updating meet athlete.");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
     [HttpDelete("{meetAthleteId}")]
     public async Task<IActionResult> DeleteMeetAthlete(Guid meetAthleteId)
     {
