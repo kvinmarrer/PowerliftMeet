@@ -101,15 +101,19 @@ export class MeetAthletesPage implements OnInit {
           error: (err) => console.error('Error adding meet athlete', err)
         });
       }
+
+      this.selectedAthleteId = '';
+      this.selectedWeightClassId = '';
+
     }
 
     @ViewChild('editMeetAthleteModal') editMeetAthleteModal!: IonModal;
     selectedMeetAthlete: any | null = null;
-    editedWeightClass: WeightClass = {} as WeightClass;
+    editedWeightClassId: string = '';
 
     openEditMeetAthleteModal(meetAthlete: any) {
       this.selectedMeetAthlete = meetAthlete;
-      this.selectedWeightClassId = meetAthlete.weightClassId;
+      this.editedWeightClassId = meetAthlete.weightClassId;
       this.selectedAthleteId = meetAthlete.athleteId;
       this.onAthleteSelected();
       this.editMeetAthleteModal.present();
@@ -120,7 +124,7 @@ export class MeetAthletesPage implements OnInit {
     }
 
     confirmEdit() {
-      this.meetAthleteService.editMeetAthlete(this.selectedMeetAthlete.id, { weightClassId: this.selectedWeightClassId }).subscribe({
+      this.meetAthleteService.editMeetAthlete(this.selectedMeetAthlete.id, { weightClassId: this.editedWeightClassId }).subscribe({
         next: () => {
           this.loadMeetAthletes();
         },
@@ -132,6 +136,7 @@ export class MeetAthletesPage implements OnInit {
 
     onEditWillDismiss(event: CustomEvent<OverlayEventDetail>) {
       this.selectedMeetAthlete = null;
+      this.selectedAthleteId = '';
     }
 
     deleteMeetAthlete(meetAthleteId: string) {

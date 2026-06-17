@@ -19,7 +19,10 @@
     "NAME": "Name",
     "ADD_MEET": "Wettkampf hinzufügen",
     "ATHLETES": "Athleten",
-    "START": "Wettkampf starten"
+    "START": "Wettkampf starten",
+    "FLIGHTS": "Gruppen",
+    "PENDING": "Ausstehend",
+    "REGISTERED": "registriert"
   },
   "ATHLETES": {
     "TITLE": "Athleten",
@@ -80,5 +83,11 @@
   "SCOREBOARD": {
     "TITLE": "Rangliste",
     "SUBTITLE": "Aktuelle Ergebnisse des Wettkampfs"
+  },
+  "FLIGHT": {
+    "TITLE": "Gruppe",
+    "SEARCH": {
+      "PLACEHOLDER": "Name suchen..."
+    }
   }
 }

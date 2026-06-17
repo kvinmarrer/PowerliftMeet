@@ -68,7 +68,9 @@ public static class MappingExtensions
         {
             Id = flight.Id,
             MeetId = flight.MeetId,
-            FlightNumber = flight.FlightNumber
+            FlightNumber = flight.FlightNumber,
+            Label = flight.Label,
+            MeetAthletes = flight.MeetAthletes?.Select(ma => ma.ToDto()).ToList() ?? new List<MeetAthleteDto>()
         };
     }
 

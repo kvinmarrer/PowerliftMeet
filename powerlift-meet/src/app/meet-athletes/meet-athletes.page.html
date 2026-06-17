@@ -50,7 +50,7 @@
               [(ngModel)]="selectedAthleteId"
               (ionChange)="onAthleteSelected()">
               <ion-select-option *ngFor="let a of availableAthletes" [value]="a.id">
-                {{ a.firstName }} {{ a.lastName }} — {{ a.clubDto?.name }}
+                {{ a.firstName }} {{ a.lastName }} — {{ a.clubDto.name }}
               </ion-select-option>
             </ion-select>
           </ion-item>
@@ -90,7 +90,7 @@
           <ion-select
             label="{{ 'MEET_ATHLETES.WEIGHT_CLASS' | translate }}"
             labelPlacement="stacked"
-            [(ngModel)]="selectedWeightClassId">
+            [(ngModel)]="editedWeightClassId">
             <ion-select-option *ngFor="let wc of filteredWeightClasses" [value]="wc.id">
               {{ wc.weight }} kg
             </ion-select-option>

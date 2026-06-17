@@ -1,0 +1,88 @@
+<app-header [showBack]="true" [backHref]="meet_detail_link" title="{{ 'FLIGHT.TITLE' | translate }}"></app-header>
+
+<ion-content>
+  <ion-toolbar>
+    <ion-searchbar
+      placeholder="{{ 'FLIGHT.SEARCH.PLACEHOLDER' | translate }}"
+      debounce="200"
+      [(ngModel)]="searchTerm"
+      (ionInput)="onSearchInput()"
+      >
+    </ion-searchbar>
+  </ion-toolbar>
+
+  <ion-list>
+    <ion-item *ngFor="let flight of flights" [routerLink]="['/flight-detail', flight.id]">
+      <ion-label>
+        <h2>{{ flight.label }}</h2>
+        <p>{{ 'FLIGHT.NUMBER' | translate }}: {{ flight.flightNumber }}</p>
+        <p>{{ 'FLIGHT.ATHLETES' | translate }}: {{ flight.meetAthletes.length }}</p>
+      </ion-label>
+      <ion-button slot="end" fill="clear" color="danger" (click)="deleteFlight(flight.id)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-button id="open-flight-add-modal" expand="block" class="meet-modal-button">{{ 'FLIGHT.ADD_FLIGHT' | translate }}</ion-button>
+  <ion-modal trigger="open-flight-add-modal" class="meet-modal" (willDismiss)="onWillDismiss($event)" #addFlightModal>
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">{{ 'FLIGHT.CANCEL' | translate }}</ion-button>
+          </ion-buttons>
+          <ion-title>{{ 'FLIGHT.ADD_FLIGHT' | translate }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true" [disabled]="!label">{{ 'FLIGHT.CONFIRM' | translate }}</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-select
+            label="{{ 'FLIGHT.LABEL' | translate }}"
+            labelPlacement="stacked"
+            type="text"              
+            placeholder="{{ 'FLIGHT.LABEL' | translate }}"
+            [(ngModel)]="label" required
+          >
+            <ion-select-option *ngFor="let option of labelOptions" [value]="option.value">{{ option.label }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="drag-drop-container" cdkDropListGroup>
+          <div class="drop-zone-box">
+            <ion-list-header><ion-label>Verfügbare Athleten</ion-label></ion-list-header>
+            <div
+              cdkDropList
+              [cdkDropListData]="unassignedAthletes"
+              class="drop-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="drag-item" *ngFor="let ma of unassignedAthletes" cdkDrag>
+                <ion-icon name="grip-vertical" slot="start" class="drag-handle"></ion-icon>
+                {{ ma.athleteDto.firstName }} {{ ma.athleteDto.lastName }}
+              </div>
+            </div>
+          </div>
+
+          <div class="drop-zone-box targeted">
+            <ion-list-header><ion-label>In diesem Flight</ion-label></ion-list-header>
+            <div
+              cdkDropList
+              [cdkDropListData]="selectedAthletes"
+              class="drop-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="drag-item selected-item" *ngFor="let ma of selectedAthletes" cdkDrag>
+                <ion-icon name="checkmark-circle" color="success" slot="start"></ion-icon>
+                {{ ma.athleteDto.firstName }} {{ ma.athleteDto.lastName }}
+              </div>
+              <div class="empty-placeholder" *ngIf="selectedAthletes.length === 0">
+                Hierhin ziehen
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>  
+</ion-content>

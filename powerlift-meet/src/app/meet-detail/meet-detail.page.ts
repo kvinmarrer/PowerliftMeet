@@ -11,6 +11,7 @@ import { Meet, MeetService } from '../services/meet.service';
 export class MeetDetailPage implements OnInit {
   meet?: any;
   athleteCount = 0;
+  flightCount = 0;
 
   get canStart(): boolean {
     return this.athleteCount > 0;
@@ -29,6 +30,7 @@ export class MeetDetailPage implements OnInit {
     this.meetService.getMeetById(id).subscribe(meet => {
       this.meet = meet;
       this.athleteCount = meet.meetAthletes?.length ?? 0;
+      this.flightCount = meet.flights?.length ?? 0;
     });
   }
 

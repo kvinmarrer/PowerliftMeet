@@ -19,6 +19,13 @@ export interface CreateMeetRequest {
 
 export interface MeetById extends Meet {
   meetAthletes: MeetAthlete[];
+  flights: Flight[];
+}
+
+export interface Flight {
+  id: string;
+  label: string;
+  flightNumber: number;
 }
 
 export interface MeetAthlete {

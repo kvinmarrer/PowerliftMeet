@@ -19,7 +19,10 @@
     "NAME": "Name",
     "ADD_MEET": "Add Meet",
     "ATHLETES": "Athletes",
-    "START": "Start Meet"
+    "FLIGHTS": "Flights",
+    "PENDING": "Pending",
+    "START": "Start Meet",
+    "REGISTERED": "registered"
   },
   "ATHLETES": {
     "TITLE": "Athletes",
@@ -80,6 +83,12 @@
   "SCOREBOARD": {
     "TITLE": "Scoreboard",
     "SUBTITLE": "Current results of the meet"
+  },
+  "FLIGHT": {
+    "TITLE": "Flight",
+    "SEARCH": {
+      "PLACEHOLDER": "Search by name ..."
+    }
   }
     
 }

@@ -15,10 +15,20 @@
       <ion-icon slot="start" name="people-outline" color="primary"></ion-icon>
       <ion-label>
         <h2>{{ 'MEET.ATHLETES' | translate }}</h2>
-        <p>{{ athleteCount }} registriert</p>
+        <p>{{ athleteCount }} {{ 'MEET.REGISTERED' | translate }}</p>
       </ion-label>
       <ion-badge slot="end" color="success" *ngIf="athleteCount > 0">✓</ion-badge>
-      <ion-badge slot="end" color="warning" *ngIf="athleteCount === 0">Ausstehend</ion-badge>
+      <ion-badge slot="end" color="warning" *ngIf="athleteCount === 0">{{ 'MEET.PENDING' | translate }}</ion-badge>
+    </ion-item>
+
+    <ion-item [routerLink]="['/tabs/flight', meet?.id]" detail="true">
+      <ion-icon slot="start" name="layers-outline" color="primary"></ion-icon>
+      <ion-label>
+        <h2>{{ 'MEET.FLIGHTS' | translate }}</h2>
+        <p>{{ flightCount }} {{ 'MEET.FLIGHTS' | translate }}</p>
+      </ion-label>
+      <ion-badge slot="end" color="success" *ngIf="flightCount > 0">✓</ion-badge>
+      <ion-badge slot="end" color="warning" *ngIf="flightCount === 0">{{ 'MEET.PENDING' | translate }}</ion-badge>
     </ion-item>
 
   </ion-list>

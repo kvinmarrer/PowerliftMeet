@@ -27,6 +27,10 @@ const routes: Routes = [
         loadChildren: () => import('./meet-athletes/meet-athletes.module').then( m => m.MeetAthletesPageModule)
       },
       {
+        path: 'flight/:meetId',
+        loadChildren: () => import('./flight/flight.module').then( m => m.FlightPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'
