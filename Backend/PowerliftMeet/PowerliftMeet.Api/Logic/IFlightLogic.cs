@@ -6,5 +6,6 @@ public interface IFlightLogic
 {
     Task<IEnumerable<FlightDto>> GetFlightsByMeetIdAsync(Guid meetId);
     Task<FlightDto> AddFlightToMeetAsync(Guid meetId, CreateFlightRequestDto request);
+    Task<FlightDto> EditFlightAsync(Guid flightId, CreateFlightRequestDto request);
     Task DeleteFlightAsync(Guid flightId);
 }

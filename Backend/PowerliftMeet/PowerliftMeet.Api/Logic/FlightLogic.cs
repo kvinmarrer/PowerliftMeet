@@ -87,6 +87,55 @@ public class FlightLogic : IFlightLogic
         return createdFlight.ToDto();
     }
 
+    public async Task<FlightDto> EditFlightAsync(Guid flightId, CreateFlightRequestDto request)
+    {
+        var flight = await _dbContext.Flights
+            .Include(f => f.MeetAthletes)
+            .FirstOrDefaultAsync(f => f.Id == flightId);
+
+        if (flight == null)
+        {
+            throw new ArgumentException($"Flight with ID {flightId} not found.");
+        }
+
+        flight.FlightNumber = request.FlightNumber;
+        flight.Label = request.Label;
+
+        flight.MeetAthletes.Clear();
+        foreach (var meetAthleteId in request.MeetAthleteIds)
+        {
+            var meetAthlete = await _dbContext.MeetAthletes.FindAsync(meetAthleteId);
+            if (meetAthlete != null)
+            {
+                flight.MeetAthletes.Add(meetAthlete);
+            }
+            else
+            {
+                throw new ArgumentException($"MeetAthlete with ID {meetAthleteId} not found.");
+            }
+        }
+
+        await _dbContext.SaveChangesAsync();
+
+        var updatedFlight = await _dbContext.Flights
+            .Where(f => f.Id == flight.Id)
+            .Include(f => f.Meet)
+            .Include(f => f.MeetAthletes)
+                .ThenInclude(ma => ma.Athlete)
+                    .ThenInclude(a => a.Club)
+                
+            .Include(f => f.MeetAthletes)
+                .ThenInclude(ma => ma.WeightClass)
+            .FirstOrDefaultAsync();
+
+        if (updatedFlight == null)
+        {
+            throw new ArgumentException($"Flight with ID {flight.Id} not found.");
+        }
+
+        return updatedFlight.ToDto();
+    }
+
     public async Task DeleteFlightAsync(Guid flightId)
     {
         var flight = await _dbContext.Flights

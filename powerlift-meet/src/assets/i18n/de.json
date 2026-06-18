@@ -88,6 +88,17 @@
     "TITLE": "Gruppe",
     "SEARCH": {
       "PLACEHOLDER": "Name suchen..."
-    }
+    },
+    "ATHLETES_COUNT": "Athleten",
+    "FLIGHT_NUMBER": "Gruppen Nummer",
+    "AVAILABLE_ATHLETES": "Verfügbare Athleten",
+    "IN_THIS_FLIGHT": "In dieser Gruppe",
+    "DRAG_HERE": "Hierhin ziehen",
+    "ADD_FLIGHT": "Gruppe hinzufügen",
+    "EDIT_FLIGHT": "Gruppe bearbeiten",
+    "CANCEL": "Abbrechen",
+    "CONFIRM": "Bestätigen",
+    "FLIGHT_LABEL": "Gruppenbezeichnung",
+    "NO_AVAILABLE_ATHLETES": "Keine verfügbaren Athleten zum Hinzufügen."
   }
 }

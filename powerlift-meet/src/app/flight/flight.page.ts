@@ -20,8 +20,6 @@ export class FlightPage implements OnInit {
   meet_detail_link: string = '';
   meetId: string = '';
 
-  searchTerm: string = '';
-
   constructor(private route: ActivatedRoute, private meetAthleteService: MeetAthleteService, private flightService: FlightService) { }
 
   loadData() {
@@ -69,9 +67,6 @@ export class FlightPage implements OnInit {
     });
   }
 
-  onSearchInput() {
-  }
-
   drop(event: CdkDragDrop<MeetAthlete[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -117,6 +112,53 @@ export class FlightPage implements OnInit {
       },
       error: (err) => console.error('Error deleting flight', err)
     });
+  }
+
+  @ViewChild('editFlightModal') editFlightModal!: IonModal;
+  flightToEdit: Flight | null = null;
+  editFlightLabel: string = '';
+  editFlightNumber: number = 0;
+  dragAndDropAthletes: MeetAthlete[] = [];
+
+  openEditFlightModal(flight: Flight) {
+    this.flightToEdit = { ...flight, meetAthletes: [...flight.meetAthletes] };
+    this.editFlightLabel = flight.label;
+    this.editFlightNumber = flight.flightNumber;
+
+    this.selectedAthletes = [...flight.meetAthletes];
+
+    const otherFlightAthleteIds = this.flights
+      .filter(f => f.id !== flight.id)
+      .reduce((acc, f) => acc.concat(f.meetAthletes.map(a => a.id)), [] as string[]);
+
+    this.meetAthleteService.getMeetAthletesByMeetId(this.meetId).subscribe(ma => {
+      this.unassignedAthletes = ma.filter(a => !otherFlightAthleteIds.includes(a.id) 
+        && !flight.meetAthletes.some(fa => fa.id === a.id));
+      this.editFlightModal.present();
+    });
+}
+
+  confirmEdit() {
+    if (this.flightToEdit) {
+      const request = {
+        label: this.editFlightLabel,
+        flightNumber: this.editFlightNumber,
+        meetAthleteIds: this.selectedAthletes.map(a => a.id)  
+      };
+      this.flightService.editFlight(this.flightToEdit.id, request).subscribe({
+        next: () => {
+          this.loadData();
+          this.editFlightModal.dismiss();
+        },
+        error: (err) => console.error('Error updating flight', err)
+      });
+    }
+  }
+
+  onEditDismiss(event: CustomEvent<OverlayEventDetail<any>>) {
+    this.flightToEdit = null;
+    this.selectedAthletes = [];  
+    this.loadMeetAthletes();     
   }
 
 }

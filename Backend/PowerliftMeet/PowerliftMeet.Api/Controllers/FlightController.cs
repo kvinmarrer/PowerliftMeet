@@ -48,6 +48,21 @@ public class FlightController : ControllerBase
         }
     }
 
+    [HttpPut("{flightId}")]
+    public async Task<ActionResult<FlightDto>> EditFlight(Guid flightId, [FromBody] CreateFlightRequestDto request)
+    {
+        try
+        {
+            var flight = await _flightLogic.EditFlightAsync(flightId, request);
+            return Ok(flight);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while editing flight.");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
     [HttpDelete("{flightId}")]
     public async Task<IActionResult> DeleteFlight(Guid flightId)
     {

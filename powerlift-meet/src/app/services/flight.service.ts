@@ -33,6 +33,10 @@ export class FlightService {
     return this.http.post(`${this.apiUrl}/meet/${meetId}`, request);
   }
 
+  editFlight(flightId: string, request: CreateFlightRequest) {
+    return this.http.put(`${this.apiUrl}/${flightId}`, request);
+  }
+
   deleteFlight(flightId: string) {
     return this.http.delete(`${this.apiUrl}/${flightId}`);
   }

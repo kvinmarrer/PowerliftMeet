@@ -21,7 +21,7 @@
       <ion-badge slot="end" color="warning" *ngIf="athleteCount === 0">{{ 'MEET.PENDING' | translate }}</ion-badge>
     </ion-item>
 
-    <ion-item [routerLink]="['/tabs/flight', meet?.id]" detail="true">
+    <ion-item [routerLink]="['/tabs/flight', meet?.id]" detail="true" [disabled]="!athleteCount">
       <ion-icon slot="start" name="layers-outline" color="primary"></ion-icon>
       <ion-label>
         <h2>{{ 'MEET.FLIGHTS' | translate }}</h2>

@@ -40,12 +40,14 @@ ion-split-pane {
 
 
 @media screen and (width < map.get(variables.$size-map, "desktop")) {
-
 }
 
 @media screen and (width < map.get(variables.$size-map, "handy")) {
     .header__title {
-        text-align: center;
-        font-size: 0.9rem;
+        display: none;
+    }
+
+    .header__logo {
+        width: 100%;
     }
 }

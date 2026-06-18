@@ -88,7 +88,18 @@
     "TITLE": "Flight",
     "SEARCH": {
       "PLACEHOLDER": "Search by name ..."
-    }
+    },
+    "ATHLETES_COUNT": "Athletes",
+    "FLIGHT_NUMBER": "Flight Number",
+    "AVAILABLE_ATHLETES": "Available Athletes",
+    "IN_THIS_FLIGHT": "In This Flight",
+    "DRAG_HERE": "Drag Here",
+    "ADD_FLIGHT": "Add Flight",
+    "EDIT_FLIGHT": "Edit Flight",
+    "CANCEL": "Cancel",
+    "CONFIRM": "Confirm",
+    "FLIGHT_LABEL": "Flight Label",
+    "NO_AVAILABLE_ATHLETES": "No available athletes to add."
   }
     
 }
