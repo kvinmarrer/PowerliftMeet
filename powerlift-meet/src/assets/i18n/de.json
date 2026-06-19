@@ -22,7 +22,9 @@
     "START": "Wettkampf starten",
     "FLIGHTS": "Gruppen",
     "PENDING": "Ausstehend",
-    "REGISTERED": "registriert"
+    "REGISTERED": "registriert",
+    "WEIGH_IN": "Wiegen",
+    "WEIGH_IN_DESC": "Wiegen der Athleten"
   },
   "ATHLETES": {
     "TITLE": "Athleten",
@@ -100,5 +102,18 @@
     "CONFIRM": "Bestätigen",
     "FLIGHT_LABEL": "Gruppenbezeichnung",
     "NO_AVAILABLE_ATHLETES": "Keine verfügbaren Athleten zum Hinzufügen."
+  },
+  "WEIGH_IN": {
+    "TITLE": "Wiegen",
+    "SUBTITLE": "Wiegen der Athleten",
+    "ATHLETE": "Athlet",
+    "BODY_WEIGHT": "Körpergewicht",
+    "CONFIRM_WEIGH_IN": "Wiegen bestätigen",
+    "CANCEL": "Abbrechen",
+    "CONFIRM": "Bestätigen"
+  },
+  "RECORDS": {
+    "TITLE": "Rekorde",
+    "SUBTITLE": "Aktuelle Rekorde im Sport anzeigen"
   }
 }

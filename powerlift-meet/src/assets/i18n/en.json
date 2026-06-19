@@ -22,7 +22,9 @@
     "FLIGHTS": "Flights",
     "PENDING": "Pending",
     "START": "Start Meet",
-    "REGISTERED": "registered"
+    "REGISTERED": "registered",
+    "WEIGH_IN": "Weigh-In",
+    "WEIGH_IN_DESC": "Weighing the athletes"
   },
   "ATHLETES": {
     "TITLE": "Athletes",
@@ -100,6 +102,19 @@
     "CONFIRM": "Confirm",
     "FLIGHT_LABEL": "Flight Label",
     "NO_AVAILABLE_ATHLETES": "No available athletes to add."
+  },
+  "WEIGH_IN": {
+    "TITLE": "Weigh-In",
+    "SUBTITLE": "Record the body weight of the athletes",
+    "ATHLETE": "Athlete",
+    "BODY_WEIGHT": "Body Weight",
+    "CONFIRM_WEIGH_IN": "Confirm Weigh-In",
+    "CANCEL": "Cancel",
+    "CONFIRM": "Confirm"
+  },
+  "RECORDS": {
+    "TITLE": "Records",
+    "SUBTITLE": "View the current records in the sport"
   }
     
 }

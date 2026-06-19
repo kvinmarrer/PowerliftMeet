@@ -16,7 +16,10 @@ export interface Flight {
 export interface CreateFlightRequest {
   label: string;
   flightNumber: number;
-  meetAthleteIds: string[];
+  meetAthleteIdWithLots: {
+    id: string;
+    lot: number;
+  }[];
 }
 
 @Injectable({ providedIn: 'root' })

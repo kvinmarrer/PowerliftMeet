@@ -31,6 +31,10 @@ const routes: Routes = [
         loadChildren: () => import('./flight/flight.module').then( m => m.FlightPageModule)
       },
       {
+        path: 'weigh-in/:meetId',
+        loadChildren: () => import('./weigh-in/weigh-in.module').then( m => m.WeighInPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'

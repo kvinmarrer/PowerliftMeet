@@ -13,6 +13,10 @@ export class MeetDetailPage implements OnInit {
   athleteCount = 0;
   flightCount = 0;
 
+  get weighInComplete(): boolean {
+    return this.meet?.meetAthletes?.every((athlete: any) => athlete.bodyWeight !== null && athlete.bodyWeight !== undefined);
+  }
+
   get canStart(): boolean {
     return this.athleteCount > 0;
   }

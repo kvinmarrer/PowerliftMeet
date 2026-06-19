@@ -84,7 +84,10 @@ export class FlightPage implements OnInit {
     const newFlight = {
       meetId: this.meetId,
       label: this.label,
-      meetAthleteIds: this.selectedAthletes.map(a => a.id)
+      meetAthleteIdWithLots: this.selectedAthletes.map((a, index) => ({
+        id: a.id,
+        lot: index + 1, 
+      }))
     };
     this.addFlightModal.dismiss(newFlight, 'confirm');
   }
@@ -125,7 +128,11 @@ export class FlightPage implements OnInit {
     this.editFlightLabel = flight.label;
     this.editFlightNumber = flight.flightNumber;
 
-    this.selectedAthletes = [...flight.meetAthletes];
+    this.selectedAthletes = [...flight.meetAthletes].sort((a, b) => {
+      const lotA = a.lot || 0;
+      const lotB = b.lot || 0;
+      return lotA - lotB;
+    });
 
     const otherFlightAthleteIds = this.flights
       .filter(f => f.id !== flight.id)
@@ -143,7 +150,10 @@ export class FlightPage implements OnInit {
       const request = {
         label: this.editFlightLabel,
         flightNumber: this.editFlightNumber,
-        meetAthleteIds: this.selectedAthletes.map(a => a.id)  
+        meetAthleteIdWithLots: this.selectedAthletes.map((a, index) => ({
+          id: a.id,
+          lot: index + 1
+        }))
       };
       this.flightService.editFlight(this.flightToEdit.id, request).subscribe({
         next: () => {

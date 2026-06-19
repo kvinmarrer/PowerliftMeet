@@ -53,16 +53,18 @@ public class FlightLogic : IFlightLogic
         await _dbContext.SaveChangesAsync();
 
         // Add the specified MeetAthletes to the flight
-        foreach (var meetAthleteId in request.MeetAthleteIds)
+        foreach (var item in request.MeetAthleteIdWithLots)
         {
-            var meetAthlete = await _dbContext.MeetAthletes.FindAsync(meetAthleteId);
+            var meetAthlete = await _dbContext.MeetAthletes.FindAsync(item.Id);
             if (meetAthlete != null)
             {
+                meetAthlete.FlightId = flight.Id;
+                meetAthlete.Lot = item.Lot;
                 flight.MeetAthletes.Add(meetAthlete);
             }
             else
             {
-                throw new ArgumentException($"MeetAthlete with ID {meetAthleteId} not found.");
+                throw new ArgumentException($"MeetAthlete with ID {item.Id} not found.");
             }
         }
 
@@ -102,16 +104,18 @@ public class FlightLogic : IFlightLogic
         flight.Label = request.Label;
 
         flight.MeetAthletes.Clear();
-        foreach (var meetAthleteId in request.MeetAthleteIds)
+        foreach (var item in request.MeetAthleteIdWithLots)
         {
-            var meetAthlete = await _dbContext.MeetAthletes.FindAsync(meetAthleteId);
+            var meetAthlete = await _dbContext.MeetAthletes.FindAsync(item.Id);
             if (meetAthlete != null)
             {
+                meetAthlete.FlightId = flight.Id;
+                meetAthlete.Lot = item.Lot;
                 flight.MeetAthletes.Add(meetAthlete);
             }
             else
             {
-                throw new ArgumentException($"MeetAthlete with ID {meetAthleteId} not found.");
+                throw new ArgumentException($"MeetAthlete with ID {item.Id} not found.");
             }
         }
 
@@ -149,6 +153,7 @@ public class FlightLogic : IFlightLogic
         foreach (var meetAthlete in flight.MeetAthletes)
         {
             meetAthlete.FlightId = null;
+            meetAthlete.Lot = null;
         }
 
         _dbContext.Flights.Remove(flight);

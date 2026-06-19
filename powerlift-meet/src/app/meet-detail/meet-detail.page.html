@@ -31,6 +31,16 @@
       <ion-badge slot="end" color="warning" *ngIf="flightCount === 0">{{ 'MEET.PENDING' | translate }}</ion-badge>
     </ion-item>
 
+    <ion-item [routerLink]="['/tabs/weigh-in', meet?.id]" detail="true" [disabled]="!flightCount">
+      <ion-icon slot="start" name="clipboard-outline" color="primary"></ion-icon>
+      <ion-label>
+        <h2>{{ 'MEET.WEIGH_IN' | translate }}</h2>
+        <p>{{ 'MEET.WEIGH_IN_DESC' | translate }}</p>
+      </ion-label>
+      <ion-badge slot="end" color="success" *ngIf="weighInComplete">✓</ion-badge>
+      <ion-badge slot="end" color="warning" *ngIf="!weighInComplete">{{ 'MEET.PENDING' | translate }}</ion-badge>
+    </ion-item>
+
   </ion-list>
 
   <!-- Meet actions -->
@@ -52,6 +62,14 @@
     <ion-button expand="block" fill="outline" [routerLink]="['/tabs/scoreboard']">
       <ion-icon slot="start" name="stats-chart-outline"></ion-icon>
       {{ 'SCOREBOARD.TITLE' | translate }}
+    </ion-button>
+    <ion-button expand="block" fill="outline" [routerLink]="['/tabs/meet-results', meet?.id]">
+      <ion-icon slot="start" name="trophy-outline"></ion-icon>
+      {{ 'MEET.RESULTS' | translate }}
+    </ion-button>
+    <ion-button expand="block" fill="outline" [routerLink]="['/tabs/meet-export-import', meet?.id]">
+      <ion-icon slot="start" name="download-outline"></ion-icon>
+      {{ 'MEET.EXPORT' | translate }} / {{ 'MEET.IMPORT' | translate }}
     </ion-button>
   </ng-container>
 
