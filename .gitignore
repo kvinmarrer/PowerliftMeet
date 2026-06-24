@@ -107,8 +107,12 @@ Thumbs.db
 # Node Modules
 node_modules/
 dist/
+
 *.env
 *.env
+
+appsettings*.Production.json
+appsettingsProduction.json
 
 node_modules
 **/node_modules

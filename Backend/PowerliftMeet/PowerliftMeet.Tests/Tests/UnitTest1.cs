@@ -26,16 +26,17 @@ public class MeetControllerTests
         // Arrange
         var meets = new List<MeetDto>
         {
-            new MeetDto { Id = Guid.NewGuid(), Name = "Test Meet", Location = "Zurich", Date = DateTime.Now }
+            new MeetDto { Id = Guid.NewGuid(), Name = "Meet 1" },
+            new MeetDto { Id = Guid.NewGuid(), Name = "Meet 2" }
         };
-        _meetLogicMock.Setup(x => x.GetMeetsAsync()).ReturnsAsync(meets);
+        _meetLogicMock.Setup(logic => logic.GetMeetsAsync()).ReturnsAsync(meets);
 
         // Act
         var result = await _controller.GetMeets();
 
         // Assert
-        var ok = Assert.IsType<OkObjectResult>(result.Result);
-        var returned = Assert.IsAssignableFrom<IEnumerable<MeetDto>>(ok.Value);
-        Assert.Single(returned);
+        var okResult = Assert.IsType<OkObjectResult>(result);
+        var returnValue = Assert.IsType<List<MeetDto>>(okResult.Value);
+        Assert.Equal(2, returnValue.Count);
     }
 }

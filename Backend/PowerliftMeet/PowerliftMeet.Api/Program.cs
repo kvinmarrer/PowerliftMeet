@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PowerliftMeet.Database;
 using PowerliftMeet.Api.Logic;
-using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,12 +39,10 @@ builder.Configuration
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-Env.Load();
-
 var config = builder.Configuration;
 
 // get full connection string from environment variable
-var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(
