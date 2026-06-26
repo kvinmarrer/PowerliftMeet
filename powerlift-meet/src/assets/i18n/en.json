@@ -115,6 +115,19 @@
   "RECORDS": {
     "TITLE": "Records",
     "SUBTITLE": "View the current records in the sport"
+  },
+  "LOGOUT": {
+    "TITLE": "Logout"
+  },
+  "LOGIN": {
+    "TITLE": "Login",
+    "EMAIL": "Email",
+    "NAME": "Name",
+    "PASSWORD": "Password",
+    "REGISTER": "Register",
+    "FORGOT_PASSWORD": "Forgot Password?",
+    "NO_ACCOUNT": "No Account?",
+    "ALREADY_REGISTERED": "Already Registered?"
   }
     
 }

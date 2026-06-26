@@ -115,5 +115,18 @@
   "RECORDS": {
     "TITLE": "Rekorde",
     "SUBTITLE": "Aktuelle Rekorde im Sport anzeigen"
+  },
+  "LOGOUT": {
+    "TITLE": "Abmelden"
+  },
+  "LOGIN": {
+    "TITLE": "Anmelden",
+    "EMAIL": "E-Mail",
+    "NAME": "Name",
+    "PASSWORD": "Passwort",
+    "REGISTER": "Registrieren",
+    "FORGOT_PASSWORD": "Passwort vergessen?",
+    "NO_ACCOUNT": "Noch kein Konto?",
+    "ALREADY_REGISTERED": "Bereits registriert?"
   }
 }

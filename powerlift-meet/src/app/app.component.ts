@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Auth } from './services/auth';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
   standalone: false,
 })
 export class AppComponent {
-  constructor(private translate: TranslateService) {
+  constructor(private translate: TranslateService, private auth: Auth) {
     translate.setFallbackLang('de');
     translate.use('de');
   }
@@ -23,5 +24,9 @@ export class AppComponent {
     language = language.toLowerCase();
     this.translate?.use(language);
     localStorage.setItem('language', language);
+  }
+
+  logout() {
+    this.auth.logout();
   }
 }

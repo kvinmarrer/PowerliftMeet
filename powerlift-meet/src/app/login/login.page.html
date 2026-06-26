@@ -1,0 +1,30 @@
+<ion-content class="ion-padding">
+  <div style="max-width: 400px; margin: 60px auto;">
+    <h1>{{ isRegister ? ('LOGIN.REGISTER' | translate) : ('LOGIN.TITLE' | translate) }}</h1>
+
+    <ion-item *ngIf="isRegister">
+      <ion-label position="floating">{{ 'LOGIN.NAME' | translate }}</ion-label>
+      <ion-input [(ngModel)]="name" type="text" />
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">{{ 'LOGIN.EMAIL' | translate }}</ion-label>
+      <ion-input [(ngModel)]="email" type="email" />
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">{{ 'LOGIN.PASSWORD' | translate }}</ion-label>
+      <ion-input [(ngModel)]="password" type="password" />
+    </ion-item>
+
+    <p *ngIf="error" style="color: red;">{{ error }}</p>
+
+    <ion-button expand="block" style="margin-top: 20px;" (click)="submit()">
+      {{ isRegister ? ('LOGIN.REGISTER' | translate) : ('LOGIN.TITLE' | translate) }}
+    </ion-button>
+
+    <ion-button expand="block" fill="clear" (click)="isRegister = !isRegister">
+      {{ isRegister ? ('LOGIN.ALREADY_REGISTERED' | translate) : ('LOGIN.NO_ACCOUNT' | translate) }}
+    </ion-button>
+  </div>
+</ion-content>

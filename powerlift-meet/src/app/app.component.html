@@ -43,6 +43,12 @@
               {{ 'RECORDS.TITLE' | translate }}
             </ion-button>
           </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-button expand="block" fill="clear" (click)="logout()">
+              <ion-icon slot="start" name="log-out-outline"></ion-icon>
+              {{ 'LOGOUT.TITLE' | translate }}
+            </ion-button>
+          </ion-menu-toggle>
         </div>
       </ion-content>
     </ion-menu>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,8 @@ import { TranslateHttpLoader, TRANSLATE_HTTP_LOADER_CONFIG } from '@ngx-translat
 
 import { SharedModule } from './shared/shared.module';
 import { HeaderComponent } from './header/header.component';
+
+import { authInterceptor } from './interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +31,7 @@ import { HeaderComponent } from './header/header.component';
     HeaderComponent
   ],
   providers: [
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
     {
       provide: TRANSLATE_HTTP_LOADER_CONFIG,
       useValue: {

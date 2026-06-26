@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PowerliftMeet.Api.DTOs;
 using PowerliftMeet.Api.Logic;
 
 namespace PowerliftMeet.Api.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class MeetAthleteController : ControllerBase

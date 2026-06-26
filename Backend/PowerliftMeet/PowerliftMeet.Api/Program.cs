@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using PowerliftMeet.Database;
 using PowerliftMeet.Api.Logic;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +29,21 @@ builder.Services.AddTransient<IFlightLogic, FlightLogic>();
 builder.Services.AddControllers();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+        };
+    });
+
 // Configuration
 var currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
 var environmentName = builder.Environment.EnvironmentName;
@@ -37,7 +56,25 @@ builder.Configuration
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+    });
+
+    c.AddSecurityRequirement((document) => new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecuritySchemeReference("Bearer", document),
+            new List<string>()
+        }
+    });
+});
 
 var config = builder.Configuration;
 
@@ -86,6 +123,7 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = "";
 });
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
