@@ -113,6 +113,7 @@ public class AuthController : ControllerBase
         }
 
         var token = GenerateJwt(user);
-        return Redirect($"http://localhost:8100/auth/callback?token={token}");
+        var frontendUrl = _config["App:FrontendUrl"];
+        return Redirect($"{frontendUrl}/auth/callback?token={token}");
     }
 }

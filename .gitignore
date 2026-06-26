@@ -118,3 +118,7 @@ appsettings.Development.json
 node_modules
 **/node_modules
 Backend/PowerliftMeet/PowerliftMeet.Api/appsettings.Development.json
+Backend/PowerliftMeet/PowerliftMeet.Api/appsettings.Development.json
+**/publish/
+Backend/PowerliftMeet/PowerliftMeet.Api/publish/
+Backend/PowerliftMeet/publish/
