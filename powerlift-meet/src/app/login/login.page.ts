@@ -44,4 +44,8 @@ export class LoginPage implements OnInit {
       });
     }
   }
+
+  loginWithGoogle() {
+    this.auth.loginWithGoogle();
+  }
 }

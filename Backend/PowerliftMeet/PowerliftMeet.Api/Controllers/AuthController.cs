@@ -6,7 +6,9 @@ using System.Security.Claims;
 using System.Text;
 using PowerliftMeet.Database;
 using PowerliftMeet.Database.Entities;
-using BCrypt.Net;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authorization;
 using PowerliftMeet.Api.DTOs;
 
 namespace PowerliftMeet.Api.Controllers;
@@ -80,5 +82,37 @@ public class AuthController : ControllerBase
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+
+    [HttpGet("google-login")]
+    [AllowAnonymous]
+    public IActionResult GoogleLogin()
+    {
+        var redirectUrl = Url.Action("GoogleCallback", "Auth");
+        var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
+        return Challenge(properties, GoogleDefaults.AuthenticationScheme);
+    }
+
+    [HttpGet("google-callback")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GoogleCallback()
+    {
+        var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
+        if (!result.Succeeded) return Unauthorized();
+
+        var email = result.Principal!.FindFirstValue(ClaimTypes.Email)!;
+        var name = result.Principal!.FindFirstValue(ClaimTypes.Name)!;
+
+        var user = await _db.Users.FirstOrDefaultAsync(u => u.Email == email);
+        if (user == null)
+        {
+            user = new User { Email = email, Name = name };
+            _db.Users.Add(user);
+            await _db.SaveChangesAsync();
+        }
+
+        var token = GenerateJwt(user);
+        return Redirect($"http://localhost:8100/auth/callback?token={token}");
     }
 }

@@ -113,6 +113,8 @@ dist/
 
 appsettings*.Production.json
 appsettingsProduction.json
+appsettings.Development.json
 
 node_modules
 **/node_modules
+Backend/PowerliftMeet/PowerliftMeet.Api/appsettings.Development.json

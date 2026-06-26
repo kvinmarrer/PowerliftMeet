@@ -59,4 +59,9 @@ export class Auth {
       return null;
     }
   }
+
+  loginWithGoogle() {
+    window.location.href = `${environment.apiBaseUrl}/auth/google-login`;
+  }
+  
 }

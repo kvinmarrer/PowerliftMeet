@@ -127,7 +127,8 @@
     "REGISTER": "Register",
     "FORGOT_PASSWORD": "Forgot Password?",
     "NO_ACCOUNT": "No Account?",
-    "ALREADY_REGISTERED": "Already Registered?"
+    "ALREADY_REGISTERED": "Already Registered?",
+    "GOOGLE": "Login with Google"
   }
     
 }
