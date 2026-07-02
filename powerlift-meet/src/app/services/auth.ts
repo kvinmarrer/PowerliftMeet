@@ -49,7 +49,6 @@ export class Auth {
     if (!token) return null;
     try {
       const decoded: any = jwtDecode(token);
-      console.log('Decoded JWT:', decoded);
       return {
         userId: decoded.userId,
         email: decoded.email,
